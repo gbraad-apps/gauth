@@ -1,5 +1,4 @@
 A simple Google Authenticator app written in HTML using jQuery Mobile, jsSHA and LocalStorage.
-Currently supports a single account
 
 Based on the JavaScript implementation as provided by Tin Isles:
 http://blog.tinisles.com/2011/10/google-authenticator-one-time-password-algorithm-in-javascript/

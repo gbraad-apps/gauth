@@ -59,22 +59,59 @@ function timer() {
     var epoch = Math.round(new Date().getTime() / 1000.0);
     var countDown = 30 - (epoch % 30);
     if (epoch % 30 == 0) {
-        $('#otp').text(updateOtp(localStorage.keySecret));
+        updateKeys();
     }
     $('#updatingIn').text(countDown);
+}
+
+function updateKeys() {
+    var accountList = $('#accounts');
+    // Remove all except the first line
+    accountList.find("li:gt(0)").remove();
+
+    $.each(getObject('accounts'), function (index, account) {
+        var key = updateOtp(account.secret);
+        var delLink = $('<a href="#"></a>');
+        delLink.click(function () {
+            deleteAccount(index)
+        });
+        var detLink = $('<a href="#"><h3 id="account' + index + '">' + account.name + '</h3><p id="key' + index + '">' + key + '</p></a>');
+        var accElem = $('<li>').append(detLink).append(delLink);
+
+        accountList.append(accElem);
+    });
+    accountList.listview('refresh');
+}
+
+function deleteAccount(index) {
+    var accounts = getObject('accounts');
+    accounts.splice(index, 1);
+    setObject('accounts', accounts);
+    updateKeys();
+}
+
+function setObject(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+}
+
+function getObject(key) {
+    var value = localStorage.getItem(key);
+    return value && JSON.parse(value);
 }
 
 $(function () {
     // Check if local storage is supported
     if (typeof (Storage) !== "undefined") {
-        // Set the overview page
-        $('#otp').text(updateOtp(localStorage.keySecret));
-        $('#account').text(localStorage.keyAccount);
-        setInterval(timer, 1000);
+        if (!getObject('accounts')) {
+            var account = [{
+                'name': 'alice@google.com',
+                'secret': 'JBSWY3DPEHPK3PXP'
+            }, ];
+            setObject('accounts', account);
+        }
 
-        // Load from local storage
-        $('#keySecret').val(localStorage.keySecret);
-        $('#keyAccount').val(localStorage.keyAccount);
+        updateKeys();
+        setInterval(timer, 1000);
     } else {
         $('#updatingIn').text("x");
         $('#account').text("No Storage support");
@@ -82,11 +119,14 @@ $(function () {
 
     $('#save').click(function () {
         // Save in local storage
-        localStorage.keySecret = $('#keySecret').val();
-        localStorage.keyAccount = $('#keyAccount').val();
+        var account = {
+            'name': $('#keyAccount').val(),
+            'secret': $('#keySecret').val()
+        };
+        var accounts = getObject('accounts');
+        accounts.push(account);
+        setObject('accounts', accounts);
 
-        // Set the overview page
-        $('#otp').text(updateOtp(localStorage.keySecret));
-        $('#account').text(localStorage.keyAccount);
+        updateKeys();
     });
 });

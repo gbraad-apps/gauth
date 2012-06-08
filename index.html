@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<title>Google Authenticator</title>
 		<script src="jquery-1.7.2.min.js"></script>
 		<script src="jquery.mobile-1.1.0.min.js"></script>
 		<script src="sha.js"></script>
@@ -14,12 +15,8 @@
 			</div>
 
 			<div data-role="content">	
-				<ul data-role="listview" data-inset="true" data-theme="g">
-					<li data-role="list-divider">One-time passwords<span class="ui-li-count" id='updatingIn'></span></li>
-					<li>
-						<h3 id="account"></h3>
-						<p id="otp"></p></li>
-					</li>
+				<ul data-role="listview" data-inset="true" data-theme="g"  data-split-theme="d" data-split-icon="delete" id="accounts">
+					<li data-role="list-divider">One-time passwords<span class="ui-li-count" id='updatingIn'>..</span></li>
 				</ul>
 			</div>
 
@@ -40,8 +37,8 @@
 					</form>
 				</p>
 			        <p>
-					<a href="#main" data-role="button" id="save">Save</a>
-					<a href="#main" data-role="button">Back</a>
+					<a href="#main" data-role="button" data-rel="back" data-theme="b" id="save">Add</a>
+					<a href="#main" data-role="button" data-rel="back" data-theme="c">Cancel</a>
 				</p>
 			</div>
 		</div>
