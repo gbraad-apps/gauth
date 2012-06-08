@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<script src="jquery-1.7.2.min.js"></script>
+		<script src="jquery.mobile-1.1.0.min.js"></script>
+		<script src="sha.js"></script>
+		<script src="code.js"></script>
+		<link rel="stylesheet" href="jquery.mobile-1.1.0.min.css" />
+	</head>
+	<body>
+		<div data-role="page" id="main">
+
+			<div data-role="header">
+				<h1>Google Authenticator</h1>
+			</div>
+
+			<div data-role="content">	
+				<ul data-role="listview" data-inset="true" data-theme="g">
+					<li data-role="list-divider">One-time passwords<span class="ui-li-count" id='updatingIn'></span></li>
+					<li>
+						<h3 id="account"></h3>
+						<p id="otp"></p></li>
+					</li>
+				</ul>
+			</div>
+
+			<a href="#settings" data-role="button" data-rel="dialog">Settings</a>
+		</div>
+
+		<div data-role="page" id="settings">
+			<div data-role="header">
+				<h1>Settings</h1>
+			</div>
+			<div data-role="content">
+				<p>
+					<form>
+						Account name:
+						<input type="text" name="keyAccount" id="keyAccount" value="" />
+						Secret key:
+						<input type="text" name="keySecret" id="keySecret" value="" />
+					</form>
+				</p>
+			        <p>
+					<a href="#main" data-role="button" id="save">Save</a>
+					<a href="#main" data-role="button">Back</a>
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
