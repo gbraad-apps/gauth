@@ -1,3 +1,6 @@
+// Originally based on the JavaScript implementation as provided by Tin Isles:
+// http://blog.tinisles.com/2011/10/google-authenticator-one-time-password-algorithm-in-javascript/
+
 function dec2hex(s) {
     return (s < 15.5 ? '0' : '') + Math.round(s).toString(16);
 }
@@ -52,10 +55,10 @@ function updateOtp(secret) {
     }
 
     var otp = (hex2dec(hmac.substr(offset * 2, 8)) & hex2dec('7fffffff')) + '';
-    return otp = (otp).substr(otp.length - 6, 6);
+    return (otp).substr(otp.length - 6, 6).toString();
 }
 
-function timer() {
+function timerTick() {
     var epoch = Math.round(new Date().getTime() / 1000.0);
     var countDown = 30 - (epoch % 30);
     if (epoch % 30 == 0) {
@@ -75,7 +78,7 @@ function updateKeys() {
         delLink.click(function () {
             deleteAccount(index)
         });
-        var detLink = $('<a href="#"><h3 id="account' + index + '">' + account.name + '</h3><p id="key' + index + '">' + key + '</p></a>');
+        var detLink = $('<a href="#"><h3>' + key + '</h3><p>' + account.name + '</p></a>');
         var accElem = $('<li>').append(detLink).append(delLink);
 
         accountList.append(accElem);
@@ -86,7 +89,9 @@ function updateKeys() {
 function deleteAccount(index) {
     var accounts = getObject('accounts');
     accounts.splice(index, 1);
+    // Persist in localstorage
     setObject('accounts', accounts);
+
     updateKeys();
 }
 
@@ -99,10 +104,12 @@ function getObject(key) {
     return value && JSON.parse(value);
 }
 
+// Main function
 $(function () {
     // Check if local storage is supported
     if (typeof (Storage) !== "undefined") {
         if (!getObject('accounts')) {
+            // Default information
             var account = [{
                 'name': 'alice@google.com',
                 'secret': 'JBSWY3DPEHPK3PXP'
@@ -111,8 +118,9 @@ $(function () {
         }
 
         updateKeys();
-        setInterval(timer, 1000);
+        setInterval(timerTick, 1000);
     } else {
+        // No support for localStorage
         $('#updatingIn').text("x");
         $('#account').text("No Storage support");
     }
@@ -125,6 +133,12 @@ $(function () {
         };
         var accounts = getObject('accounts');
         accounts.push(account);
+
+        // Empty fields
+	$('#keyAccount').val('');
+        $('#keySecret').val('');
+
+        // Persist in localstorage
         setObject('accounts', accounts);
 
         updateKeys();

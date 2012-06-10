@@ -7,6 +7,3 @@ Deployed test version is available at
 PhoneGap builds for WebOS and Android can be found at
 	http://build.phonegap.com/apps/135419/share
 
-
-Originally based on the JavaScript implementation as provided by Tin Isles:
-http://blog.tinisles.com/2011/10/google-authenticator-one-time-password-algorithm-in-javascript/
