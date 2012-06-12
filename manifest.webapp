@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "name": "Google Authenticator",
+  "description": "A simple Google Authenticator using HTML",
+  "icons": {
+    "48": "/images/icon-48.png"
+  },
+  "developer": {
+    "name": "Gerard Braad",
+    "url": "http://gbraad.nl"
+  },
+  "installs_allowed_from": ["*"],
+  "default_locale": "en"
+}
