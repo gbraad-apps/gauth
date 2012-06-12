@@ -105,7 +105,18 @@ function getObject(key) {
 }
 
 // Main function
-$(function () {
+$(document).bind('pagecreate', function() {
+    //new GAuth.Controller();
+
+    // Background styling for dialogs
+    $('div[data-role="dialog"]').live('pagebeforeshow', function(e, ui) {
+        ui.prevPage.addClass("ui-dialog-background");
+    });
+
+    $('div[data-role="dialog"]').live('pagehide', function(e, ui) {
+        $(".ui-dialog-background ").removeClass("ui-dialog-background");
+    });
+
     // Check if local storage is supported
     if (typeof (Storage) !== "undefined") {
         if (!getObject('accounts')) {
