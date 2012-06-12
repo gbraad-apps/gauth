@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "name": "Google Authenticator",
-  "description": "A simple Google Authenticator using HTML",
+  "name": "GAuth Authenticator",
+  "description": "A simple application for use with Google Authenticator writtin in HTML",
   "icons": {
     "48": "/images/icon-48.png"
   },

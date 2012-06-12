@@ -1,4 +1,4 @@
-A simple Google Authenticator app written in HTML using jQuery Mobile, jsSHA and LocalStorage.
+A simple application for use with Google Authenticator writtin in HTML using jQuery Mobile, jsSHA and LocalStorage.
 
 
 Deployed test version is available at
