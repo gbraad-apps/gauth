@@ -1,6 +1,8 @@
 <html>
 	<head>
 		<title>GAuth Authenticator</title>
+		<meta name="HandheldFriendly" content="True">
+		<meta http-equiv="cleartype" content="on">
 		<script src="jquery-1.7.2.min.js"></script>
 		<script src="init.js"></script>
 		<script src="jquery.mobile-1.1.0.min.js"></script>
@@ -8,6 +10,8 @@
 		<script src="code.js"></script>
 		<link rel="stylesheet" href="jquery.mobile-1.1.0.min.css" />
 		<link rel="stylesheet" href="styling.css" />
+		<link rel="shortcut icon" href="./favicon.ico" />
+		<link rel="apple-touch-icon" href="./images/icon-48.png" />
 	</head>
 	<body>
 		<div data-role="page" id="main">
@@ -18,11 +22,16 @@
 
 			<div data-role="content">	
 				<ul data-role="listview" data-inset="true" data-theme="g"  data-split-theme="d" data-split-icon="delete" id="accounts">
-					<li data-role="list-divider">One-time passwords<span class="ui-li-count" id='updatingIn'>..</span></li>
+					<li id="accountsHeader" data-role="list-divider">One-time passwords<span class="ui-li-count" id='updatingIn'>..</span></li>
 				</ul>
+
+				<a href="#settings" data-role="button" data-rel="dialog">Settings</a>
 			</div>
 
-			<a href="#settings" data-role="button" data-rel="dialog">Settings</a>
+			<div data-role="footer">
+				<h1>@gbraad</h1>
+			</div>
+
 		</div>
 
 		<div data-role="page" id="settings">
@@ -39,7 +48,7 @@
 					</form>
 				</p>
 			        <p>
-					<a href="#main" data-role="button" data-rel="back" data-theme="b" id="save">Add</a>
+					<a href="#main" data-role="button" data-rel="back" data-theme="b" id="add">Add</a>
 					<a href="#main" data-role="button" data-rel="back" data-theme="c">Cancel</a>
 				</p>
 			</div>
