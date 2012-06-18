@@ -10,19 +10,20 @@
 		<script src="sha.js"></script>
 		<script src="code.js"></script>
 		<link rel="stylesheet" href="jquery.mobile-1.1.0.min.css" />
+		<link rel="stylesheet" href="themes/getro.css" />
 		<link rel="stylesheet" href="styling.css" />
 		<link rel="shortcut icon" href="./favicon.ico" />
 		<link rel="apple-touch-icon" href="./images/icon-48.png" />
 	</head>
 	<body>
-		<div data-role="page" id="main">
+		<div data-role="page" id="main" data-theme="a">
 
 			<div data-role="header">
 				<h1>GAuth Authenticator</h1>
 			</div>
 
 			<div data-role="content">	
-				<ul data-role="listview" data-inset="true" data-theme="g"  data-split-theme="d" data-split-icon="delete" id="accounts">
+				<ul data-role="listview" data-inset="true" data-theme="a"  data-split-theme="b" data-split-icon="delete" id="accounts">
 					<li id="accountsHeader" data-role="list-divider">One-time passwords<span class="ui-li-count" id='updatingIn'>..</span></li>
 				</ul>
 
@@ -35,7 +36,7 @@
 
 		</div>
 
-		<div data-role="page" id="settings">
+		<div data-role="page" id="settings" data-theme="a">
 			<div data-role="header">
 				<h1>Settings</h1>
 			</div>
@@ -49,8 +50,8 @@
 					</form>
 				</p>
 			        <p>
-					<a href="#main" data-role="button" data-rel="back" data-theme="b" id="add">Add</a>
-					<a href="#main" data-role="button" data-rel="back" data-theme="c">Cancel</a>
+					<a href="#main" data-role="button" data-rel="back" data-theme="a" id="add">Add</a>
+					<a href="#main" data-role="button" data-rel="back" data-theme="a">Cancel</a>
 				</p>
 			</div>
 		</div>
