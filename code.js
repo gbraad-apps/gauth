@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-StorageService = {}
+var StorageService = {}
 
 StorageService.setObject = function(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
@@ -33,7 +33,7 @@ StorageService.isSupported = function() {
 // Originally based on the JavaScript implementation as provided by Tin Isles:
 // http://blog.tinisles.com/2011/10/google-authenticator-one-time-password-algorithm-in-javascript/
 
-KeyUtilities = {}
+var KeyUtilities = {}
 
 KeyUtilities.dec2hex = function(s) {
     return (s < 15.5 ? '0' : '') + Math.round(s).toString(16);
@@ -92,7 +92,7 @@ KeyUtilities.generate = function(secret) {
 }
 
 
-KeysController = {}
+var KeysController = {}
 
 KeysController.init = function() {
     // Check if local storage is supported

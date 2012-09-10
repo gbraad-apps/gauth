@@ -2,9 +2,10 @@ A simple application for use with Google Authenticator writtin in HTML using jQu
 
 
 Deployed test version is available at
-	http://gauth.gbraad.nl
-	http://gauth.gbraad.5apps.com
+	http://gauth.apps.gbraad.nl
 
 PhoneGap builds for WebOS and Android can be found at
 	http://build.phonegap.com/apps/135419/share
 
+
+More information can be found in the about dialog
