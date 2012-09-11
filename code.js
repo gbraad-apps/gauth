@@ -30,7 +30,7 @@ StorageService.isSupported = function() {
 }
 
 
-// Originally based on the JavaScript implementation as provided by Tin Isles:
+// Originally based on the JavaScript implementation as provided by Russell Sayers on his Tin Isles blog:
 // http://blog.tinisles.com/2011/10/google-authenticator-one-time-password-algorithm-in-javascript/
 
 var KeyUtilities = {}
@@ -51,16 +51,12 @@ KeyUtilities.base32tohex = function(base32) {
         var val = base32chars.indexOf(base32.charAt(i).toUpperCase());
         bits += KeyUtilities.leftpad(val.toString(2), 5, '0');
     }
-
-    // leftpad bits with 0 until length is a multiple of 4
-    while (bits.length % 4 != 0) {
-        bits = "0" + bits;
-    }
-
-    for (var i = bits.length - 4; i >= 0; i = i - 4) {
+    
+    for (var i = 0; i + 4 <= bits.length; i += 4) {
         var chunk = bits.substr(i, 4);
-        hex = parseInt(chunk, 2).toString(16) + hex;
+        hex = hex + parseInt(chunk, 2).toString(16);
     }
+    
     return hex;
 }
 
