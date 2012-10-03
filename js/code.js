@@ -13,8 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-var StorageService = function() {
+function StorageService() {
 	var setObject = function(key, value) {
 		localStorage.setItem(key, JSON.stringify(value));
 	}
@@ -39,7 +38,7 @@ var StorageService = function() {
 // Originally based on the JavaScript implementation as provided by Russell Sayers on his Tin Isles blog:
 // http://blog.tinisles.com/2011/10/google-authenticator-one-time-password-algorithm-in-javascript/
 
-var KeyUtilities = function() {
+function KeyUtilities() {
 	var dec2hex = function(s) {
 		return (s < 15.5 ? '0' : '') + Math.round(s).toString(16);
 	}
@@ -98,113 +97,95 @@ var KeyUtilities = function() {
 
 // ----------------------------------------------------------------------------
 
-var KeysController = function() {
-	var storageService;
+var gauthModule = angular.module('gauth', []);
+gauthModule.factory('storageService', StorageService);
+gauthModule.factory('keyUtilities', KeyUtilities);
 
 
-	var init = function() {
-		storageService = new StorageService();
-		keyUtilities = new KeyUtilities();
+function MainController($scope, storageService, keyUtilities) {
+	$scope.updatingIn = '..';
+	$scope.accountKeys = [];
 
+	$scope.init = function() {
 		// Check if local storage is supported
 		if (storageService.isSupported()) {
 			if (!storageService.getObject('accounts')) {
-				addAccount('alice@google.com', 'JBSWY3DPEHPK3PXP');
+				$scope.addAccount('alice@google.com', 'JBSWY3DPEHPK3PXP');
 			}
 
-			updateKeys();
-			setInterval(timerTick, 1000);
+			$scope.updateKeys();
+			// setInterval(timerTick, 1000) has to be performed with a defer or $timeout
+			setInterval(function(){
+				$scope.$apply(function() {
+					$scope.timerTick();
+				});
+			}, 1000);
 		} else {
-			// No support for localStorage
-			$('#updatingIn').text("x");
-			$('#accountsHeader').text("No Storage support");
+			// no storage support
+			// TODO: show error message
 		}
-
-		// Bind to keypress event for the input
-		$('#add').click(function () {
-			var name = $('#keyAccount').val();
-			var secret = $('#keySecret').val();
-			// remove spaces from secret
-			secret = secret.replace(/ /g, '');
-			if(secret != '') {
-				addAccount(name, secret);
-			}
-		});
 	}
 
-	var timerTick = function() {
+	$scope.timerTick = function() {
 		var epoch = Math.round(new Date().getTime() / 1000.0);
-		var countDown = 30 - (epoch % 30);
 		if (epoch % 30 == 0) {
-			updateKeys();
+			$scope.updateKeys();
 		}
-		$('#updatingIn').text(countDown);
+		// countdown
+		$scope.updatingIn = 30 - (epoch % 30);
 	}
 
-	var updateKeys = function() {
-		var accountList = $('#accounts');
-		// Remove all except the first line
-		accountList.find("li:gt(0)").remove();
+	$scope.updateKeys = function() {
+		$scope.accountKeys = [];
 
 		$.each(storageService.getObject('accounts'), function (index, account) {
-			var key = keyUtilities.generate(account.secret);
-
-			// Construct HTML
-			var delLink = $('<a href="#"></a>');
-			delLink.click(function () {
-				deleteAccount(index)
-			});
-			var detLink = $('<a href="#"><h3>' + key + '</h3><p>' + account.name + '</p></a>');
-			var accElem = $('<li>').append(detLink).append(delLink);
-			// Add HTML element
-			accountList.append(accElem);
+			var key = {
+				//'index' : index,
+				'name' : account.name,
+				'key' : keyUtilities.generate(account.secret)
+			};
+			$scope.accountKeys.push(key);
 		});
-		accountList.listview('refresh');
 	}
 
-	var deleteAccount = function(index) {
+	$scope.deleteAccount = function(index) {
 		// Remove object by index
 		var accounts = storageService.getObject('accounts');
 		accounts.splice(index, 1);
 		storageService.setObject('accounts', accounts);
 
-		updateKeys();
+		$scope.updateKeys();
 	}
 
-	var addAccount = function(name, secret) {
-		if(secret == '') {
+	$scope.addAccount = function() {
+		// remove spaces from secret
+		$scope.newAccount.secret.replace(/ /g, '');
+
+		if($scope.newAccount.secret == '' && $scope.newAccount.name == '') {
 			// Bailout
-			return false;
+			$scope.resetAccount();
+		} else {
+			// Persist new object
+			var accounts = storageService.getObject('accounts');
+			accounts.push($scope.newAccount);
+			storageService.setObject('accounts', accounts);
+
+			$scope.updateKeys();
+			$scope.resetAccount();
 		}
-
-		// Construct JSON object
-		var account = {
-			'name': name,
-			'secret': secret
-		};
-
-		// Persist new object
-		var accounts = storageService.getObject('accounts');
-		accounts.push(account);
-		storageService.setObject('accounts', accounts);
-
-
-		// Empty fields
-		$('#keyAccount').val('');
-		$('#keySecret').val('');
-
-		updateKeys();
-
-		return true;
 	}
 
-	return {
-		init: init,
-		addAccount: addAccount,
-		deleteAccount: deleteAccount
+	// clear fields
+	$scope.resetAccount = function() {
+		$scope.newAccount = {};
+		$.mobile.changePage('#keys');
 	}
+
+	// delayed initialize
+	$(function() {
+		$scope.init();
+	});
 }
-
 
 // Main function
 $(document).bind('pagecreate', function() {
@@ -216,7 +197,4 @@ $(document).bind('pagecreate', function() {
 	$('div[data-role="dialog"]').live('pagehide', function(e, ui) {
 		$(".ui-dialog-background ").removeClass("ui-dialog-background");
 	});
-
-	var keysController = new KeysController();
-	keysController.init();
 });
