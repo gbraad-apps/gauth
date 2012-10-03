@@ -9,26 +9,6 @@
 	-webkit-transition: opacity 0.5s ease-in;
 }
 
-.ui-dialog {
-	min-height: 100% !important;
-	background: transparent !important;
-}
-
-div[data-role="header"], div[data-role="footer"] {
-	width: 100%;
-}
-
-div[data-role="header"] {
-	top: 0px;
-}
-
 div[data-role="footer"] {
-	position: absolute;
-	bottom: 0px;
 	display: none;
-}
-
-div[data-role="content"] {
-	height: 100%;
-	margin: 0 auto 0 auto;
 }
