@@ -46,14 +46,16 @@
 				<p>
 					<form>
 						<label for="keyAccount">Account name:</label>
-						<input type="text" name="keyAccount" id="keyAccount" value="" />
+						<input type="text" name="keyAccount" id="keyAccount" value="" autocorrect="off" autocapitalize="off" />
 						<label for="keySecret">Secret key:</label>
-						<input type="text" name="keySecret" id="keySecret" value="" />
+						<input type="text" name="keySecret" id="keySecret" value="" autocorrect="off" autocapitalize="off" />
 					</form>
 				</p>
 				<p>
-					<a href="#main" data-role="button" data-rel="back" data-theme="a" id="add">Add</a>
-					<a href="#main" data-role="button" data-rel="back" data-theme="a">Cancel</a>
+					<div data-role="controlgroup" data-type="horizontal">
+						<a href="#main" data-role="button" data-rel="back" data-theme="a" id="add">Add</a>
+						<a href="#main" data-role="button" data-rel="back" data-theme="a">Cancel</a>
+					</div>
 				</p>
 			</div>
 		</div>

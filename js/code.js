@@ -109,6 +109,8 @@ KeysController.init = function() {
     $('#add').click(function () {
         var name = $('#keyAccount').val();
         var secret = $('#keySecret').val();
+        // remove spaces from secret
+        secret = secret.replace(/ /g, '');
         if(secret != '') {
             KeysController.addAccount(name, secret);
         }
