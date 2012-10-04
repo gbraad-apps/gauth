@@ -14,194 +14,213 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+var StorageService = function() {
+	var setObject = function(key, value) {
+		localStorage.setItem(key, JSON.stringify(value));
+	}
+	var getObject = function(key) {
+		var value = localStorage.getItem(key);
+		// if(value) return parsed JSON else undefined
+		return value && JSON.parse(value);
+	}
 
-var StorageService = {}
+	var isSupported = function() {
+		return typeof (Storage) !== "undefined";
+	}
 
-StorageService.setObject = function(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+	// exposed functions
+	return {
+		isSupported: isSupported,
+		getObject: getObject,
+		setObject: setObject
+	}
 }
-StorageService.getObject = function(key) {
-    var value = localStorage.getItem(key);
-    return value && JSON.parse(value);
-}
-
-StorageService.isSupported = function() {
-    return typeof (Storage) !== "undefined";
-}
-
 
 // Originally based on the JavaScript implementation as provided by Russell Sayers on his Tin Isles blog:
 // http://blog.tinisles.com/2011/10/google-authenticator-one-time-password-algorithm-in-javascript/
 
-var KeyUtilities = {}
+var KeyUtilities = function() {
+	var dec2hex = function(s) {
+		return (s < 15.5 ? '0' : '') + Math.round(s).toString(16);
+	}
 
-KeyUtilities.dec2hex = function(s) {
-    return (s < 15.5 ? '0' : '') + Math.round(s).toString(16);
-}
-KeyUtilities.hex2dec = function(s) {
-    return parseInt(s, 16);
-}
+	var hex2dec = function(s) {
+		return parseInt(s, 16);
+	}
 
-KeyUtilities.base32tohex = function(base32) {
-    var base32chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
-    var bits = "";
-    var hex = "";
+	var base32tohex = function(base32) {
+		var base32chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+		var bits = "";
+		var hex = "";
 
-    for (var i = 0; i < base32.length; i++) {
-        var val = base32chars.indexOf(base32.charAt(i).toUpperCase());
-        bits += KeyUtilities.leftpad(val.toString(2), 5, '0');
-    }
-    
-    for (var i = 0; i + 4 <= bits.length; i += 4) {
-        var chunk = bits.substr(i, 4);
-        hex = hex + parseInt(chunk, 2).toString(16);
-    }
-    
-    return hex;
-}
+		for (var i = 0; i < base32.length; i++) {
+			var val = base32chars.indexOf(base32.charAt(i).toUpperCase());
+			bits += leftpad(val.toString(2), 5, '0');
+		}
 
-KeyUtilities.leftpad = function(str, len, pad) {
-    if (len + 1 >= str.length) {
-        str = Array(len + 1 - str.length).join(pad) + str;
-    }
-    return str;
-}
+		for (var i = 0; i + 4 <= bits.length; i += 4) {
+			var chunk = bits.substr(i, 4);
+			hex = hex + parseInt(chunk, 2).toString(16);
+		}
 
-KeyUtilities.generate = function(secret) {
-    var key = KeyUtilities.base32tohex(secret);
-    var epoch = Math.round(new Date().getTime() / 1000.0);
-    var time = KeyUtilities.leftpad(KeyUtilities.dec2hex(Math.floor(epoch / 30)), 16, '0');
+		return hex;
+	}
 
-    var hmacObj = new jsSHA(time, "HEX");
-    var hmac = hmacObj.getHMAC(key, "HEX", "SHA-1", "HEX");
+	var leftpad = function(str, len, pad) {
+		if (len + 1 >= str.length) {
+			str = Array(len + 1 - str.length).join(pad) + str;
+		}
+		return str;
+	}
 
-    if (hmac != 'KEY MUST BE IN BYTE INCREMENTS') {
-        var offset = KeyUtilities.hex2dec(hmac.substring(hmac.length - 1));
-        // Debug
-        //var part1 = hmac.substr(0, offset * 2);
-        //var part2 = hmac.substr(offset * 2, 8);
-        //var part3 = hmac.substr(offset * 2 + 8, hmac.length - offset);
-    }
+	var generate = function(secret) {
+		var key = base32tohex(secret);
+		var epoch = Math.round(new Date().getTime() / 1000.0);
+		var time = leftpad(dec2hex(Math.floor(epoch / 30)), 16, '0');
 
-    var otp = (KeyUtilities.hex2dec(hmac.substr(offset * 2, 8)) & KeyUtilities.hex2dec('7fffffff')) + '';
-    return (otp).substr(otp.length - 6, 6).toString();
-}
+		// external library for SHA functionality
+		var hmacObj = new jsSHA(time, "HEX");
+		var hmac = hmacObj.getHMAC(key, "HEX", "SHA-1", "HEX");
 
+		if (hmac != 'KEY MUST BE IN BYTE INCREMENTS') {
+			var offset = hex2dec(hmac.substring(hmac.length - 1));
+		}
 
-var KeysController = {}
+		var otp = (hex2dec(hmac.substr(offset * 2, 8)) & hex2dec('7fffffff')) + '';
+		return (otp).substr(otp.length - 6, 6).toString();
+	}
 
-KeysController.init = function() {
-    // Check if local storage is supported
-    if (StorageService.isSupported()) {
-        if (!StorageService.getObject('accounts')) {
-            KeysController.addAccount('alice@google.com', 'JBSWY3DPEHPK3PXP');
-        }
-
-        KeysController.updateKeys();
-        setInterval(KeysController.timerTick, 1000);
-    } else {
-        // No support for localStorage
-        $('#updatingIn').text("x");
-        $('#accountsHeader').text("No Storage support");
-    }
-
-    // Bind to keypress event for the input
-    $('#add').click(function () {
-        var name = $('#keyAccount').val();
-        var secret = $('#keySecret').val();
-        // remove spaces from secret
-        secret = secret.replace(/ /g, '');
-        if(secret != '') {
-            KeysController.addAccount(name, secret);
-        }
-    });
+	// exposed functions
+	return {
+		generate: generate
+	}
 }
 
-KeysController.timerTick = function() {
-    var epoch = Math.round(new Date().getTime() / 1000.0);
-    var countDown = 30 - (epoch % 30);
-    if (epoch % 30 == 0) {
-        KeysController.updateKeys();
-    }
-    $('#updatingIn').text(countDown);
-}
+// ----------------------------------------------------------------------------
 
-KeysController.updateKeys = function() {
-    var accountList = $('#accounts');
-    // Remove all except the first line
-    accountList.find("li:gt(0)").remove();
+var KeysController = function() {
+	var storageService;
+	var keyUtilities;
 
-    $.each(StorageService.getObject('accounts'), function (index, account) {
-        var key = KeyUtilities.generate(account.secret);
+	var init = function() {
+		storageService = new StorageService();
+		keyUtilities = new KeyUtilities();
 
-        // Construct HTML
-        var delLink = $('<a href="#"></a>');
-        delLink.click(function () {
-            KeysController.deleteAccount(index)
-        });
-        var detLink = $('<a href="#"><h3>' + key + '</h3><p>' + account.name + '</p></a>');
-        var accElem = $('<li>').append(detLink).append(delLink);
-        // Add HTML element
-        accountList.append(accElem);
-    });
-    accountList.listview('refresh');
-}
+		// Check if local storage is supported
+		if (storageService.isSupported()) {
+			if (!storageService.getObject('accounts')) {
+				addAccount('alice@google.com', 'JBSWY3DPEHPK3PXP');
+			}
 
-KeysController.deleteAccount = function(index) {
-    // Retrieve current objects
-    var accounts = StorageService.getObject('accounts');
-    accounts.splice(index, 1);
+			updateKeys();
+			setInterval(timerTick, 1000);
+		} else {
+			// No support for localStorage
+			$('#updatingIn').text("x");
+			$('#accountsHeader').text("No Storage support");
+		}
 
-    // Persist in localstorage
-    StorageService.setObject('accounts', accounts);
+		// Bind to keypress event for the input
+		$('#add').click(function () {
+			var name = $('#keyAccount').val();
+			var secret = $('#keySecret').val();
+			// remove spaces from secret
+			secret = secret.replace(/ /g, '');
+			if(secret != '') {
+				addAccount(name, secret);
+			}
+		});
+	}
 
-    KeysController.updateKeys();
-}
+	var timerTick = function() {
+		var epoch = Math.round(new Date().getTime() / 1000.0);
+		var countDown = 30 - (epoch % 30);
+		if (epoch % 30 == 0) {
+			updateKeys();
+		}
+		$('#updatingIn').text(countDown);
+	}
 
-KeysController.addAccount = function(name, secret) {
-    if(secret == '') {
-        // Bailout
-        return false;
-    }
+	var updateKeys = function() {
+		var accountList = $('#accounts');
+		// Remove all except the first line
+		accountList.find("li:gt(0)").remove();
 
-    // Construct JSON object
-    var account = {
-        'name': name,
-        'secret': secret
-    };
+		$.each(storageService.getObject('accounts'), function (index, account) {
+			var key = keyUtilities.generate(account.secret);
 
-    // Get existing list of objects
-    var accounts = StorageService.getObject('accounts');
-    if (!accounts) {
-        accounts = [];
-    }
+			// Construct HTML
+			var delLink = $('<a href="#"></a>');
+			delLink.click(function () {
+				deleteAccount(index)
+			});
+			var detLink = $('<a href="#"><h3>' + key + '</h3><p>' + account.name + '</p></a>');
+			var accElem = $('<li>').append(detLink).append(delLink);
+			// Add HTML element
+			accountList.append(accElem);
+		});
+		accountList.listview('refresh');
+	}
 
-    // Add to list
-    accounts.push(account);
+	var deleteAccount = function(index) {
+		// Remove object by index
+		var accounts = storageService.getObject('accounts');
+		accounts.splice(index, 1);
+		storageService.setObject('accounts', accounts);
 
-    // Empty fields
-    $('#keyAccount').val('');
-    $('#keySecret').val('');
+		updateKeys();
+	}
 
-    // Persist in localstorage
-    StorageService.setObject('accounts', accounts);
+	var addAccount = function(name, secret) {
+		if(secret == '') {
+			// Bailout
+			return false;
+		}
 
-    KeysController.updateKeys();
+		// Construct JSON object
+		var account = {
+			'name': name,
+			'secret': secret
+		};
 
-    return true;
+		// Persist new object
+		var accounts = storageService.getObject('accounts');
+		if (!accounts) {
+			// if undefined create a new array
+			accounts = [];
+		}
+		accounts.push(account);
+		storageService.setObject('accounts', accounts);
+
+
+		// Empty fields
+		$('#keyAccount').val('');
+		$('#keySecret').val('');
+
+		updateKeys();
+
+		return true;
+	}
+
+	return {
+		init: init,
+		addAccount: addAccount,
+		deleteAccount: deleteAccount
+	}
 }
 
 
 // Main function
 $(document).bind('pagecreate', function() {
-    // Background styling for dialogs
-    $('div[data-role="dialog"]').live('pagebeforeshow', function(e, ui) {
-        ui.prevPage.addClass("ui-dialog-background");
-    });
+	// Background styling for dialogs
+	$('div[data-role="dialog"]').live('pagebeforeshow', function(e, ui) {
+		ui.prevPage.addClass("ui-dialog-background");
+	});
 
-    $('div[data-role="dialog"]').live('pagehide', function(e, ui) {
-        $(".ui-dialog-background ").removeClass("ui-dialog-background");
-    });
+	$('div[data-role="dialog"]').live('pagehide', function(e, ui) {
+		$(".ui-dialog-background ").removeClass("ui-dialog-background");
+	});
 
-    KeysController.init();
+	var keysController = new KeysController();
+	keysController.init();
 });
