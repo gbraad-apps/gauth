@@ -1,6 +1,8 @@
 GAuth Authenticator
 ===================
 
+[![Build Status](https://secure.travis-ci.org/gbraad/html5-google-authenticator.png?branch=master)](http://travis-ci.org/gbraad/html5-google-authenticator)
+
 A simple application for multi-factor authentication, written in HTML using
 jQuery Mobile (and PhoneGap), jsSHA and LocalStorage. It implements RFC4226
 (HMAC-based OTP) and has been tested to work with Google Authenticator,

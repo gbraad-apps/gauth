@@ -1,0 +1,33 @@
+{
+  "name": "html5-gauth",
+  "version": "0.0.1",
+  "description": "simple application for muti-factor authentication",
+  "keywords": [
+    "totp",
+    "gauth"
+  ],
+  "author": "Gerard Braad",
+  "license": "GPL",
+  "bugs": {
+    "url": "https://github.com/gbraad/html5-google-authenticator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gbraad/html5-google-authenticator.git"
+  },
+  "main": "index.html",
+  "window": {
+    "width": 360,
+    "height": 480,
+    "toolbar": false
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "grunt": "~0.3.14",
+    "jshint": "latest"
+  },
+  "scripts": {
+    "test": "grunt travis --verbose"
+  }
+}
