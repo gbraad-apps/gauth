@@ -12,3 +12,8 @@
 div[data-role="footer"] {
 	display: none;
 }
+
+#accounts h3 {
+	font-family: monospace;
+	font-size: 200%;
+}
