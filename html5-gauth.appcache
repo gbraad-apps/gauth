@@ -1,0 +1,19 @@
+CACHE MANIFEST
+# v1 - 2013-05-31
+img/flattr-badge-large.png
+img/icon-48.png
+img/icon_x32.png
+img/icon_x32-white.png
+css/images/icons-18-black.png
+css/images/icons-36-black.png
+css/images/icons-18-white.png
+css/images/ajax-loader.gif
+css/images/icons-36-white.png
+css/images/ajax-loader.png
+css/jquery.mobile-1.2.0.min.css
+css/styling.css
+js/code.js
+js/init.js
+lib/jssha-1.31.min.js
+lib/jquery-1.8.2.min.js
+lib/jquery.mobile-1.2.0.min.js
