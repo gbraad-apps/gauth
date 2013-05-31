@@ -1,0 +1,17 @@
+{
+    "version": "0.0.2",
+    "name": "html5-gauth",
+    "description": "simple application for muti-factor authentication",
+    "icons": {
+        "48": "icon-48.png"
+    },
+    "developer": {
+        "name": "Gerard Braad",
+        "url": "http://github.com/gbraad"
+    },
+    "installs_allowed_from": [
+        "*"
+    ],
+    "appcache_path": "/html5-gauth.appcache",
+    "default_locale": "en"
+}
