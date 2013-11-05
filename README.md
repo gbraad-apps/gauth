@@ -8,7 +8,7 @@ jQuery Mobile (and PhoneGap), jsSHA and LocalStorage. It implements RFC4226
 (HMAC-based OTP) and has been tested to work with Google Authenticator,
 Dropbox, Dreamhost and Amazon.
 
-
+* [Supported services](https://github.com/gbraad/html5-google-authenticator/wiki/Supported-services)
 * [Deployed test version](http://gauth.apps.gbraad.nl "test version")
 * [PhoneGap builds for WebOS and Android](http://build.phonegap.com/apps/135419/share "PhoneGap Build")
 * [Extension for
