@@ -5,7 +5,8 @@ var EXPRESS_ROOT = __dirname;
 var LIVERELOAD_PORT = 35729;
  
 var gulp = require('gulp');
-var log = require('gulp-util').log;
+var gutil = require('gulp-util');
+var log = gutil.log;
 
 var jshint = require('gulp-jshint');
 
@@ -23,18 +24,20 @@ gulp.task('watch', function(){
   gulp.watch(codeFiles, ['lint']);
 });
 
-function startExpress() {
+function startExpress(root, port) {
   var express = require('express');
   var app = express();
   app.use(require('connect-livereload')());
-  app.use(express.static(EXPRESS_ROOT));
-  app.listen(EXPRESS_PORT);
+  app.use(express.static(root));
+  app.listen(port, function() {
+    log('Listening on port:', port);
+  });
 }
 
 var lr;
-function startLivereload() {
+function startLivereload(port) {
   lr = require('tiny-lr')();
-  lr.listen(LIVERELOAD_PORT);
+  lr.listen(port);
 }
  
 function notifyLivereload(event) {
@@ -43,8 +46,8 @@ function notifyLivereload(event) {
 }
 
 gulp.task('server', function () {
-  startExpress();
-  startLivereload();
+  startExpress(EXPRESS_ROOT, EXPRESS_PORT);
+  startLivereload(LIVERELOAD_PORT);
   gulp.watch(['*.html', 'js/**/*.js'], notifyLivereload);
 });
 
