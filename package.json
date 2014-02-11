@@ -21,13 +21,14 @@
     "height": 480,
     "toolbar": false
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "grunt": "~0.3.14",
-    "jshint": "latest"
+    "gulp": "~3.5.2",
+    "gulp-util": "~2.2.0",
+    "jshint": "~2.4.1",
+    "gulp-jshint": "~1.4.0"
   },
   "scripts": {
-    "test": "grunt travis --verbose"
+    "test": "gulp"
   }
 }

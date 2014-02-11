@@ -1,0 +1,22 @@
+{
+  "node": true,
+  "curly": true,
+  "eqeqeq": true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "sub": true,
+  "boss": true,
+  "eqnull": true,
+  "browser": true,
+  "globals": {
+    "$": true,
+    "jsSHA": true,
+    "jQuery": true,
+    "describe": true,
+    "it": true,
+    "beforeEach": true,
+    "afterEach": true
+  }
+}
