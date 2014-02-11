@@ -23,10 +23,14 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "express": "~3.4.8",
+    "tiny-lr": "~0.0.5",
+    "connect-livereload": "~0.3.2",
     "gulp": "~3.5.2",
     "gulp-util": "~2.2.0",
     "jshint": "~2.4.1",
-    "gulp-jshint": "~1.4.0"
+    "gulp-jshint": "~1.4.0",
+    "gulp-livereload": "~1.1.1"
   },
   "scripts": {
     "test": "gulp"
