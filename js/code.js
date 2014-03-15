@@ -154,7 +154,9 @@ var KeysController = function() {
 			// Construct HTML
 			var delLink = $('<a href="#"></a>');
 			delLink.click(function () {
-				deleteAccount(index);
+				if (confirm('Are you sure you want to remove the account (' + account.name + ') ?')) {
+					deleteAccount(index);
+				}
 			});
 			var detLink = $('<a href="#"><h3>' + key + '</h3><p>' + account.name + '</p></a>');
 			var accElem = $('<li>').append(detLink).append(delLink);
