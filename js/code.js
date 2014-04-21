@@ -100,6 +100,10 @@ var KeyUtilities = function() {
 
 // ----------------------------------------------------------------------------
 
+var CopyPaste = function(text) {
+	window.prompt("Copy to clipboard: Ctrl+C / Cmd+C, Enter", text);
+}
+
 var KeysController = function() {
 	var storageService;
 	var keyUtilities;
@@ -156,7 +160,7 @@ var KeysController = function() {
 			delLink.click(function () {
 				deleteAccount(index);
 			});
-			var detLink = $('<a href="#"><h3>' + key + '</h3><p>' + account.name + '</p></a>');
+			var detLink = $('<a href="#" onClick="CopyPaste('+String(key)+');"><h3>' + key + '</h3><p>' + account.name + '</p></a>');
 			var accElem = $('<li>').append(detLink).append(delLink);
 			// Add HTML element
 			accountList.append(accElem);
