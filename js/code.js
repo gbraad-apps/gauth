@@ -17,24 +17,25 @@
 var StorageService = function() {
 	var setObject = function(key, value) {
 		localStorage.setItem(key, JSON.stringify(value));
-	}
+	};
+
 	var getObject = function(key) {
 		var value = localStorage.getItem(key);
 		// if(value) return parsed JSON else undefined
 		return value && JSON.parse(value);
-	}
+	};
 
 	var isSupported = function() {
 		return typeof (Storage) !== "undefined";
-	}
+	};
 
 	// exposed functions
 	return {
 		isSupported: isSupported,
 		getObject: getObject,
 		setObject: setObject
-	}
-}
+	};
+};
 
 // Originally based on the JavaScript implementation as provided by Russell Sayers on his Tin Isles blog:
 // http://blog.tinisles.com/2011/10/google-authenticator-one-time-password-algorithm-in-javascript/
@@ -42,11 +43,11 @@ var StorageService = function() {
 var KeyUtilities = function() {
 	var dec2hex = function(s) {
 		return (s < 15.5 ? '0' : '') + Math.round(s).toString(16);
-	}
+	};
 
 	var hex2dec = function(s) {
 		return parseInt(s, 16);
-	}
+	};
 
 	var base32tohex = function(base32) {
 		var base32chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
@@ -58,20 +59,20 @@ var KeyUtilities = function() {
 			bits += leftpad(val.toString(2), 5, '0');
 		}
 
-		for (var i = 0; i + 4 <= bits.length; i += 4) {
+		for (i = 0; i + 4 <= bits.length; i += 4) {
 			var chunk = bits.substr(i, 4);
 			hex = hex + parseInt(chunk, 2).toString(16);
 		}
 
 		return hex;
-	}
+	};
 
 	var leftpad = function(str, len, pad) {
 		if (len + 1 >= str.length) {
-			str = Array(len + 1 - str.length).join(pad) + str;
+			str = new Array(len + 1 - str.length).join(pad) + str;
 		}
 		return str;
-	}
+	};
 
 	var generate = function(secret) {
 		var key = base32tohex(secret);
@@ -82,19 +83,20 @@ var KeyUtilities = function() {
 		var hmacObj = new jsSHA(time, "HEX");
 		var hmac = hmacObj.getHMAC(key, "HEX", "SHA-1", "HEX");
 
-		if (hmac != 'KEY MUST BE IN BYTE INCREMENTS') {
-			var offset = hex2dec(hmac.substring(hmac.length - 1));
+		var offset;
+		if (hmac !== 'KEY MUST BE IN BYTE INCREMENTS') {
+			offset = hex2dec(hmac.substring(hmac.length - 1));
 		}
 
 		var otp = (hex2dec(hmac.substr(offset * 2, 8)) & hex2dec('7fffffff')) + '';
 		return (otp).substr(otp.length - 6, 6).toString();
-	}
+	};
 
 	// exposed functions
 	return {
 		generate: generate
-	}
-}
+	};
+};
 
 // ----------------------------------------------------------------------------
 
@@ -126,20 +128,20 @@ var KeysController = function() {
 			var secret = $('#keySecret').val();
 			// remove spaces from secret
 			secret = secret.replace(/ /g, '');
-			if(secret != '') {
+			if(secret !== '') {
 				addAccount(name, secret);
 			}
 		});
-	}
+	};
 
 	var timerTick = function() {
 		var epoch = Math.round(new Date().getTime() / 1000.0);
 		var countDown = 30 - (epoch % 30);
-		if (epoch % 30 == 0) {
+		if (epoch % 30 === 0) {
 			updateKeys();
 		}
 		$('#updatingIn').text(countDown);
-	}
+	};
 
 	var updateKeys = function() {
 		var accountList = $('#accounts');
@@ -152,7 +154,7 @@ var KeysController = function() {
 			// Construct HTML
 			var delLink = $('<a href="#"></a>');
 			delLink.click(function () {
-				deleteAccount(index)
+				deleteAccount(index);
 			});
 			var detLink = $('<a href="#"><h3>' + key + '</h3><p>' + account.name + '</p></a>');
 			var accElem = $('<li>').append(detLink).append(delLink);
@@ -160,7 +162,7 @@ var KeysController = function() {
 			accountList.append(accElem);
 		});
 		accountList.listview('refresh');
-	}
+	};
 
 	var deleteAccount = function(index) {
 		// Remove object by index
@@ -169,10 +171,10 @@ var KeysController = function() {
 		storageService.setObject('accounts', accounts);
 
 		updateKeys();
-	}
+	};
 
 	var addAccount = function(name, secret) {
-		if(secret == '') {
+		if(secret === '') {
 			// Bailout
 			return false;
 		}
@@ -200,14 +202,14 @@ var KeysController = function() {
 		updateKeys();
 
 		return true;
-	}
+	};
 
 	return {
 		init: init,
 		addAccount: addAccount,
 		deleteAccount: deleteAccount
-	}
-}
+	};
+};
 
 
 // Main function
