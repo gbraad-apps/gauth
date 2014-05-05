@@ -99,15 +99,6 @@ var KeyUtilities = function() {
 };
 
 // ----------------------------------------------------------------------------
-var timerTick = function() {
-	var epoch = Math.round(new Date().getTime() / 1000.0);
-	var countDown = 30 - (epoch % 30);
-	if (epoch % 30 === 0) {
-		updateKeys();
-	}
-	$('#updatingIn').text(countDown);
-};
-
 var KeysController = function() {
 	var storageService = null,
       keyUtilities = null;
@@ -202,6 +193,15 @@ var KeysController = function() {
 
 		return true;
 	};
+
+  var timerTick = function() {
+    var epoch = Math.round(new Date().getTime() / 1000.0);
+    var countDown = 30 - (epoch % 30);
+    if (epoch % 30 === 0) {
+      updateKeys();
+    }
+    $('#updatingIn').text(countDown);
+  };
 
 	return {
 		init: init,
