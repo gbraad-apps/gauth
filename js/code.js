@@ -83,7 +83,7 @@ var KeyUtilities = function() {
 		var hmacObj = new jsSHA(time, "HEX");
 		var hmac = hmacObj.getHMAC(key, "HEX", "SHA-1", "HEX");
 
-		var offset;
+		var offset = 0;
 		if (hmac !== 'KEY MUST BE IN BYTE INCREMENTS') {
 			offset = hex2dec(hmac.substring(hmac.length - 1));
 		}
@@ -99,10 +99,18 @@ var KeyUtilities = function() {
 };
 
 // ----------------------------------------------------------------------------
+var timerTick = function() {
+	var epoch = Math.round(new Date().getTime() / 1000.0);
+	var countDown = 30 - (epoch % 30);
+	if (epoch % 30 === 0) {
+		updateKeys();
+	}
+	$('#updatingIn').text(countDown);
+};
 
 var KeysController = function() {
-	var storageService;
-	var keyUtilities;
+	var storageService = null,
+      keyUtilities = null;
 
 	var init = function() {
 		storageService = new StorageService();
@@ -132,15 +140,6 @@ var KeysController = function() {
 				addAccount(name, secret);
 			}
 		});
-	};
-
-	var timerTick = function() {
-		var epoch = Math.round(new Date().getTime() / 1000.0);
-		var countDown = 30 - (epoch % 30);
-		if (epoch % 30 === 0) {
-			updateKeys();
-		}
-		$('#updatingIn').text(countDown);
 	};
 
 	var updateKeys = function() {
