@@ -10,6 +10,8 @@ var log = gutil.log;
 
 var jshint = require('gulp-jshint');
 
+var zip = require('gulp-zip');
+
 var codeFiles = ['js/**/*.js', '!node_modules/**'];
 
 gulp.task('lint', function(){
@@ -49,6 +51,13 @@ gulp.task('server', function () {
   startExpress(EXPRESS_ROOT, EXPRESS_PORT);
   startLivereload(LIVERELOAD_PORT);
   gulp.watch(['*.html', 'js/**/*.js'], notifyLivereload);
+});
+
+gulp.task('makepkg', function () {
+  return gulp.src(['**', '!node_modules/**', '!gauth.zip',
+      '!gulpfile.js', '!package.json', '!README.md']).
+    pipe(zip('gauth.zip')).
+    pipe(gulp.dest('.'));
 });
 
 gulp.task('default', ['lint']);
