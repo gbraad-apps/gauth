@@ -14,7 +14,7 @@ var codeFiles = ['js/**/*.js', '!node_modules/**'];
 
 gulp.task('lint', function(){
   log('Linting Files');
-  return gulp.src(codeFiles)
+  gulp.src(codeFiles)
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter());
 });
