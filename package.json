@@ -30,7 +30,8 @@
     "gulp-util": "~2.2.0",
     "jshint": "~2.4.1",
     "gulp-jshint": "~1.4.0",
-    "gulp-livereload": "~1.1.1"
+    "gulp-livereload": "~1.1.1",
+    "gulp-zip": "~0.3.4"
   },
   "scripts": {
     "test": "gulp"

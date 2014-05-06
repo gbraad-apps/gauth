@@ -7,8 +7,9 @@
   "type": "privileged",
   "icons": {
     "32": "img/icon_x32.png",
-    "48": "img/icon-48.png",
-    "128": "img/icon_128.png"
+    "48": "img/icon_x48.png",
+    "60": "img/icon_x60.png",
+    "128": "img/icon_x128.png"
   },
   "installs_allowed_from": [
     "*"
