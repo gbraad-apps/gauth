@@ -3,7 +3,7 @@
   "description": "A simple application which generates TOTP tokens when multi-factor authentication is used with your Google account. It implements RFC4226 (HMAC-based OTP) and has been tested to work with Google Authenticator, Dropbox, Dreamhost and Amazon.",
   "version": "0.0.2",
   "launch_path": "/index.html",
-  "origin": "app://gauth.apps.gbraad.nl",
+  "origin": "http://gauth.apps.gbraad.nl",
   "type": "privileged",
   "icons": {
     "32": "img/icon_x32.png",
