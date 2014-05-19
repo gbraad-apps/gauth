@@ -81,8 +81,9 @@
 
 		var generate = function(secret, epoch) {
 			var key = base32tohex(secret);
-			if(typeof epoch === 'undefined')
+			if(typeof epoch === 'undefined') {
 				epoch = Math.round(new Date().getTime() / 1000.0);
+			}
 			var time = leftpad(dec2hex(Math.floor(epoch / 30)), 16, '0');
 
 			// external library for SHA functionality
@@ -136,10 +137,10 @@
 				// remove spaces from secret
 				secret = secret.replace(/ /g, '');
 				if(secret !== '') {
-					addAccount(name, secret)
+					addAccount(name, secret);
 				}
-			})
-		}
+			});
+		};
 
 		var updateKeys = function() {
 			var accountList = $('#accounts');
@@ -201,14 +202,14 @@
 			return true;
 		};
 
-	  var timerTick = function() {
-	    var epoch = Math.round(new Date().getTime() / 1000.0);
-	    var countDown = 30 - (epoch % 30);
-	    if (epoch % 30 === 0) {
-	      updateKeys();
-	    }
-	    $('#updatingIn').text(countDown);
-	  };
+		var timerTick = function() {
+			var epoch = Math.round(new Date().getTime() / 1000.0);
+			var countDown = 30 - (epoch % 30);
+			if (epoch % 30 === 0) {
+				updateKeys();
+			}
+			$('#updatingIn').text(countDown);
+		};
 
 		return {
 			init: init,
