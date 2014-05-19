@@ -82,6 +82,7 @@
 
 		var generate = function(secret, epoch) {
 			var key = base32tohex(secret);
+			// If no time is given, set time as now
 			if(typeof epoch === 'undefined') {
 				epoch = Math.round(new Date().getTime() / 1000.0);
 			}
