@@ -6,12 +6,13 @@ var window = {},
 describe('GAuth', function(){
 	var keygen = new gauth.KeyUtilities(jsSHA),
 		secret = 'JBSWY3DPEHPK3PXP',
-		fixedDate = new Date("1/1/1981").getTime() / 1000.0;
+		fixedDate = Date.UTC(1981, 1, 1) / 1000.0,
+		expectedKey = '684675';
 
 	describe('#generate()', function(){
 		it('respond with known response', function(){
 			var result = keygen.generate(secret, fixedDate);
-			assert.equal('383953', result);
+			assert.equal(expectedKey, result);
 		})
 	})
 })
