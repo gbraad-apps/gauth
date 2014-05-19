@@ -1,6 +1,5 @@
-var window = {},
-    jsSHA = require('jssha'),
-    gauth = require('../js/gauth.js'),
+var jsSHA = require('jssha'),
+	gauth = require('../js/gauth.js'),
 	assert = require('assert');
 
 describe('GAuth', function(){
@@ -13,6 +12,6 @@ describe('GAuth', function(){
 		it('respond with known response', function(){
 			var result = keygen.generate(secret, fixedDate);
 			assert.equal(expectedKey, result);
-		})
-	})
-})
+		});
+	});
+});
