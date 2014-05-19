@@ -10,9 +10,9 @@
   "boss": true,
   "eqnull": true,
   "browser": true,
+  "newcap": false,
   "globals": {
     "$": true,
-    "jsSHA": true,
     "jQuery": true,
     "describe": true,
     "it": true,
