@@ -21,7 +21,17 @@
     "height": 480,
     "toolbar": false
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "~3.4.8",
+    "tiny-lr": "~0.0.5",
+    "connect-livereload": "~0.3.2",
+    "gulp": "~3.5.2",
+    "gulp-util": "~2.2.0",
+    "gulp-livereload": "~1.1.1",
+    "gulp-jshint": "~1.4.0",
+    "gulp-zip": "~0.3.4",
+    "gulp-mocha": "~0.4.1"
+  },
   "devDependencies": {
     "express": "~3.4.8",
     "tiny-lr": "~0.0.5",
@@ -37,6 +47,10 @@
     "jssha": "~1.5.0"
   },
   "scripts": {
-    "test": "gulp"
+    "test": "gulp",
+    "start": "gulp server"
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }

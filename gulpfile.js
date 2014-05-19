@@ -1,6 +1,7 @@
 'use strict';
 
-var EXPRESS_PORT = 4000;
+// get port from environment settings for deployment on Heroku
+var EXPRESS_PORT = process.env.PORT || 4000;
 var EXPRESS_ROOT = __dirname;
 var LIVERELOAD_PORT = 35729;
  
