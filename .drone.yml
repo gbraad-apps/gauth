@@ -1,0 +1,10 @@
+image: bradrydzewski/node:0.10
+#env:
+script:
+  - npm -d install
+  - npm test
+#services:
+notify:
+  email:
+    recipients:
+      - me@gbraad.nl
