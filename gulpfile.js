@@ -12,13 +12,23 @@ var jshint = require('gulp-jshint');
 
 var zip = require('gulp-zip');
 
-var codeFiles = ['js/**/*.js', '!node_modules/**'];
+var mocha = require('gulp-mocha');
+
+var codeFiles = ['js/**/*.js', '!test/**/*.js', '!node_modules/**'];
+var testFiles = ['test/**/*.js'];
 
 gulp.task('lint', function(){
   log('Linting Files');
   gulp.src(codeFiles)
     .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter());
+    .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('test', function(){
+  log('Running mocha tests');
+  gulp.src(testFiles)
+    .pipe(mocha({reporter: 'spec'}));
 });
 
 gulp.task('watch', function(){
@@ -60,4 +70,4 @@ gulp.task('makepkg', function () {
     pipe(gulp.dest('.'));
 });
 
-gulp.task('default', ['lint']);
+gulp.task('default', ['lint', 'test']);

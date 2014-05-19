@@ -31,7 +31,10 @@
     "jshint": "~2.4.1",
     "gulp-jshint": "~1.4.0",
     "gulp-livereload": "~1.1.1",
-    "gulp-zip": "~0.3.4"
+    "gulp-zip": "~0.3.4",
+    "mocha": "~1.19.0",
+    "gulp-mocha": "~0.4.1",
+    "jssha": "~1.5.0"
   },
   "scripts": {
     "test": "gulp"

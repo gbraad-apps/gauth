@@ -45,7 +45,8 @@
 	// Originally based on the JavaScript implementation as provided by Russell Sayers on his Tin Isles blog:
 	// http://blog.tinisles.com/2011/10/google-authenticator-one-time-password-algorithm-in-javascript/
 
-	var KeyUtilities = function() {
+	var KeyUtilities = function(jsSHA) {
+
 		var dec2hex = function(s) {
 			return (s < 15.5 ? '0' : '') + Math.round(s).toString(16);
 		};
@@ -114,7 +115,7 @@
 
 		var init = function() {
 			storageService = new StorageService();
-			keyUtilities = new KeyUtilities();
+			keyUtilities = new KeyUtilities(jsSHA);
 
 			// Check if local storage is supported
 			if (storageService.isSupported()) {
@@ -221,19 +222,3 @@
 	exports.KeysController = KeysController;
 
 })(typeof exports === 'undefined' ? this['gauth']={} : exports);
-
-// Main function
-$(document).bind('pagecreate', function() {
-	// Background styling for dialogs
-	$('div[data-role="dialog"]').live('pagebeforeshow', function(e, ui) {
-		ui.prevPage.addClass("ui-dialog-background");
-	});
-
-	$('div[data-role="dialog"]').live('pagehide', function(e, ui) {
-		$(".ui-dialog-background ").removeClass("ui-dialog-background");
-	});
-
-	// Use exports from locally defined module
-	var keysController = new gauth.KeysController();
-	keysController.init();
-});
