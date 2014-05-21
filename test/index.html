@@ -1,0 +1,26 @@
+<!DOCTYPE html public "Gerard Braad"> 
+<html>
+  <head>
+    <title>GAuth Authenticator - Mocha tests</title>
+    <meta charset="utf-8">
+    <meta name="description" content="GAuth Authenticator - Mocha tests">
+    <link rel="stylesheet" href="mocha.css" />
+    <!-- purposely at the top -->
+    <script src="../lib/jquery-1.8.2.min.js"></script>
+    <script src="../lib/jssha-1.31.min.js"></script>
+    <script src="../js/gauth.js"></script>
+  </head>
+</head>
+<body>
+  <div id="mocha"></div>
+  <script src="expect.js"></script>
+  <script src="mocha.js"></script>
+  <script>mocha.setup('bdd')</script>
+  <script src="test.js"></script>
+  <script>
+    mocha.checkLeaks();
+    mocha.globals(['jQuery']);
+    mocha.run();
+  </script>
+</body>
+</html>
