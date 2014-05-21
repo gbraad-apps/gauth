@@ -5,14 +5,11 @@ if ('undefined' != typeof require) {
 }
 
 describe('gauth.KeyUtilities', function(){
-	var keyUtils = new gauth.KeyUtilities(jsSHA),
-		secret = 'JBSWY3DPEHPK3PXP',
-		fixedDate = Date.UTC(1981, 1, 1) / 1000.0,
-		expectedKey = '684675';
+	var keyUtils = new gauth.KeyUtilities(jsSHA);
 
 	describe('#generate()', function(){
 		it('respond with known key', function(){
-			expect(keyUtils.generate(secret, fixedDate)).to.be(expectedKey);
+			expect(keyUtils.generate('JBSWY3DPEHPK3PXP', Date.UTC(1981, 1, 1) / 1000.0)).to.be('684675');
 		});
 	});
 });
