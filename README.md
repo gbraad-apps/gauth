@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/gbraad/html5-google-authenticator.png?label=ready&title=Ready)](https://waffle.io/gbraad/html5-google-authenticator)
 GAuth Authenticator
 ===================
 
