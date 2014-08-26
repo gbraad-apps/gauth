@@ -1,5 +1,5 @@
 // Main function
-$(document).bind('pagecreate', function() {
+$(document).on('pagecreate', '#main', function() {
 	// Background styling for dialogs
 	$('div[data-role="dialog"]').live('pagebeforeshow', function(e, ui) {
 		ui.prevPage.addClass("ui-dialog-background");
