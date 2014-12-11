@@ -162,7 +162,7 @@
 				// Add HTML element
 				accountList.append(accElem);
 			});
-			accountList.listview('refresh');
+			accountList.listview().listview('refresh');
 		};
 
 		var deleteAccount = function(index) {
