@@ -28,8 +28,15 @@ Authors
 
 | [!["Gerard Braad"](http://gravatar.com/avatar/e466994eea3c2a1672564e45aca844d0.png?s=60)](http://gbraad.nl "Gerard Braad <me@gbraad.nl>") |
 |---|
-| [@gbraad](https://twitter.com/gbraad) |
+| [@gbraad](https://twitter.com/gbraad)  |
 
+
+Donations
+---------
+A small donation to show appreciation is always welcome.
+
+[![Gratipay tip](https://img.shields.io/gratipay/gbraad.svg)](https://gratipay.com/gbraad)
+[![Flattr this](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/717982/GAuth-Authenticator)
 
 
 Contributors
