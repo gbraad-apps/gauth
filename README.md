@@ -10,15 +10,15 @@ GAuth Authenticator
 A simple application for multi-factor authentication, written in HTML using
 jQuery Mobile (and PhoneGap), jsSHA and LocalStorage. It implements RFC4226
 (HMAC-based OTP) and has been tested to work with Google Authenticator,
-Dropbox, Dreamhost and Amazon.
+Dropbox, Dreamhost, Amazon, Linode, Okta and many others.
 
 
 * [Supported services](https://github.com/gbraad/html5-google-authenticator/wiki/Supported-services)
 * [Deployed test version](http://gauth.apps.gbraad.nl "test version")
-* [PhoneGap builds for WebOS and Android](http://build.phonegap.com/apps/135419/share "PhoneGap Build")
-* [Extension for
-Chrome](https://chrome.google.com/webstore/detail/ilgcnhelpchnceeipipijaljkblbcobl?utm_source=chrome-ntp-icon
-"Chrome extension")
+* [5Apps packaged apps](https://5apps.com/gbraad/gauth "5Apps packages") for Chrome and Firefox
+* [PhoneGap builds](http://build.phonegap.com/apps/135419/share "PhoneGap Build") for WebOS and Android
+* [Web application](https://marketplace.firefox.com/app/gauth-authenticator "Firefox Web Application") for Firefox
+* [Extension](https://chrome.google.com/webstore/detail/ilgcnhelpchnceeipipijaljkblbcobl?utm_source=chrome-ntp-icon "Chrome extension") for Chrome
 
 More information can be found in the about dialog.
 
