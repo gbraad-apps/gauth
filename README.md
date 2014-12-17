@@ -44,6 +44,15 @@ Contributors
 Matěj Cepl
 
 
+Contact
+-------
+If you have problems with the application, please first consult the
+[Issue tracker](https://github.com/gbraad/html5-google-authenticator/issues "Issue tracker")
+at Github. You can also send me an email, PM me on Freenode or drop by in the chatroom.
+
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gbraad/html5-google-authenticator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+
 License
 -------
 Licensed under the [GPL license][GPL].
