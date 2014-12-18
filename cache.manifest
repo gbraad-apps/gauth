@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v0.8.3e
+# v0.8.3f
 
 CACHE:
 css/images/ajax-loader.gif
@@ -11,6 +11,7 @@ css/images/icons-36-white.png
 css/jquery.mobile-1.2.0.min.css
 css/styling.css
 img/flattr-badge-large.png
+img/icon_x512.png
 img/icon_x128.png
 img/icon_x32-white.png
 img/icon_x32.png
