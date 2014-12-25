@@ -157,12 +157,18 @@
 				delLink.click(function () {
 					deleteAccount(index);
 				});
-				var detLink = $('<a href="#"><h3>' + key + '</h3><p>' + account.name + '</p></a>');
+				var detLink = $('<a class="copy-button" data-clipboard-text="'+ key +'" href="#"><h3>' + key + '</h3><p>' + account.name + '</p></a>');
 				var accElem = $('<li>').append(detLink).append(delLink);
 				// Add HTML element
 				accountList.append(accElem);
 			});
 			accountList.listview().listview('refresh');
+
+			//  append ZeroClipboard to all accounts for copying key to clipboard on click
+			var clients = document.getElementsByClassName("copy-button");
+			$.each(clients, function(index, clientButton) {
+				new ZeroClipboard(clientButton);
+			});
 		};
 
 		var deleteAccount = function(index) {
