@@ -1,7 +1,7 @@
 {
   "name": "GAuth Authenticator",
   "description": "A simple application which generates TOTP tokens when multi-factor authentication is used with your Google account. It implements RFC4226 (HMAC-based OTP) and has been tested to work with Google Authenticator, Dropbox, Dreamhost and Amazon.",
-  "version": "0.8.2",
+  "version": "0.8.4",
   "launch_path": "/index.html",
   "icons": {
     "16": "/img/icon_16.png",
