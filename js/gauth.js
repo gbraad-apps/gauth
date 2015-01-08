@@ -16,6 +16,7 @@
 
 (function(exports) {
 	"use strict";
+    var lastUpdate;
 
     var StorageService = function() {
 
@@ -172,7 +173,7 @@
                     else {
                         updateKeys();
                     }
-                    setInterval(timerTick, 50);
+                    setInterval(timerTick, 100);
                     setInterval(timerBar, 50);
                 });
 			} else {
@@ -292,7 +293,8 @@
 		var timerTick = function() {
 			var epoch = Math.round(new Date().getTime() / 1000.0);
 			var countDown = 30 - (epoch % 30);
-			if (epoch % 30 === 0) {
+			if (epoch % 30 === 0 && epoch != lastUpdate) {
+                lastUpdate = epoch;
 				updateKeys();
 			}
 			$('#updatingIn').text(countDown);
