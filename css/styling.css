@@ -30,18 +30,19 @@ html {
     opacity: 0.85;
 }
 
+div.header.row {
+    margin: 0;
+}
 div.header {
     background-color: #1abc9c;
     color: #fff;
 }
 div.header .add-container {
     float: left;
-    margin-left: 15px;
     margin-top: 18px;
 }
 div.header .about-container {
     float: right;
-    margin-right: 15px;
     margin-top: 18px;
 }
 div.header h1 {
