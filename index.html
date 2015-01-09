@@ -1,5 +1,5 @@
-<!DOCTYPE html public "Gerard Braad"> 
-<html manifest="cache.manifest">
+<!DOCTYPE html public "Gerard Braad">
+<html>
 	<head>
 		<title>GAuth Authenticator</title>
 		<meta charset="utf-8">
@@ -7,81 +7,90 @@
 		<meta name="HandheldFriendly" content="True">
 		<meta http-equiv="cleartype" content="on">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
-		<link rel="stylesheet" href="css/jquery.mobile-1.2.0.min.css" />
+
+		<link rel="stylesheet" href="css/bootstrap.3.3.1.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/jquery-ui-1.11.3.custom.min.css">
 		<link rel="stylesheet" href="css/styling.css" />
+
 		<!-- purposely at the top -->
-		<script src="lib/jquery-1.8.2.min.js"></script>
-		<script src="js/init.js"></script>
-		<script src="lib/jquery.mobile-1.2.0.min.js"></script>
+		<script src="lib/jquery-2.1.3.min.js"></script>
+        <script src="lib/jquery-ui-1.11.3.custom.min.js"></script>
 		<script src="lib/jssha-1.31.min.js"></script>
 		<script src="js/gauth.js"></script>
 		<script src="js/main.js"></script>
-		<link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
-		<link rel="apple-touch-icon" href="img/icon_60.png" />
+		<link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+		<link rel="apple-touch-icon" href="img/icon_60.png">
 		<link rel="apple-touch-icon" sizes="120x120" href="img/icon_120.png">
 		<link rel="apple-touch-icon" sizes="152x152" href="img/icon_152.png">
+
 	</head>
 	<body>
+		<div class="row header">
+            <div class="col-xs-12">
+                <div class="add-container">
+                    <span class="glyphicon glyphicon-plus-sign jqueryui-tooltip add-account" title="Add an account"></span>
+                </div>
+                <div class="about-container">
+                    <span class="glyphicon glyphicon-info-sign jqueryui-tooltip about" title="About"></span>
+                </div>
+                <h1>GAuth Authenticator</h1>
+            </div>
+        </div>
+        <div id="otpValues">
 
-		<div data-role="page" id="main" data-theme="a">
-			<div data-role="header">
-				<h1>GAuth Authenticator</h1>
-				<a href="#settings" data-role="button" data-rel="dialog" data-icon="plus" data-iconpos="notext">Settings</a>
-				<a href="#about" data-role="button" data-rel="dialog" data-icon="info" data-iconpos="notext">About</a>
-			</div>
+            <div id="accountsHeader">
+                <div class="header-left">One-time passwords</div><div class="header-right" id='updatingIn'>..</div>
 
-			<div data-role="content">
-				<ul data-role="listview" data-inset="true" data-theme="a"  data-split-theme="b" data-split-icon="delete" id="accounts">
-					<li id="accountsHeader" data-role="list-divider">One-time passwords<span class="ui-li-count" id='updatingIn'>..</span></li>
-				</ul>
-			</div>
-
-			<div data-role="footer">
-				<h1>@gbraad</h1>
-			</div>
+                <div id="timebar"></div>
+            </div>
+            <ul id="accounts"></ul>
 		</div>
 
-		<div data-role="dialog" id="settings" data-theme="a">
-			<div data-role="header">
-				<h1>Settings</h1>
-			</div>
-			<div data-role="content">
-				<p>
-					<form>
-						<label for="keyAccount">Account name:</label>
-						<input type="text" name="keyAccount" id="keyAccount" value="" autocorrect="off" autocapitalize="off" />
-						<label for="keySecret">Secret key:</label>
-						<input type="text" name="keySecret" id="keySecret" value="" autocorrect="off" autocapitalize="off" />
-					</form>
-				</p>
-				<p>
-					<div data-role="controlgroup" data-type="horizontal">
-						<a href="#main" data-role="button" data-rel="back" data-theme="a" id="add">Add</a>
-						<a href="#main" data-role="button" data-rel="back" data-theme="a">Cancel</a>
-					</div>
-				</p>
-			</div>
+		<div id="addAccount">
+            <h1 class="page-header">Add an account</h1>
+			<div class="form-group">
+                <label for="keyAccount">Account name</label>
+                <input type="text" class="form-control" id="keyAccount" placeholder="Account name" autocorrect="off" autocapitalize="off">
+            </div>
+            <div class="form-group">
+                <label for="keySecret">Secret key</label>
+                <input type="text" class="form-control" id="keySecret" placeholder="Secret key" autocorrect="off" autocapitalize="off">
+            </div>
+            <button type="button" class="btn btn-success" id="add">
+                <span class="glyphicon glyphicon-plus"></span>
+                Add</button>
+            <button type="button" class="btn btn-default cancel">Cancel</button>
 		</div>
 
-		<div data-role="dialog" id="about" data-theme="a">
-			<div data-role="header">
-				<h1>About</h1>
-			</div>
-			<div data-role="content">
-				<p>A simple application for multi-factor authentication, written in HTML using jQuery Mobile (and PhoneGap), jsSHA and LocalStorage</p>
-				<p><ul>
-					<li>Learn why<br/><a target=”_blank” href="http://lifehacker.com/5932700/please-turn-on-two+factor-authentication">Please, turn on two-factor authentication</a></li>
-					<li>Online<br/><a target=”_blank” href="http://gauth.apps.gbraad.nl/">http://gauth.apps.gbraad.nl/</a></li>
-					<li>Application<br/><a target=”_blank” href="https://build.phonegap.com/apps/135419/">for Android</a></li>
-					<!--<li>Extension<br/><a target=”_blank” href="https://chrome.google.com/webstore/detail/ilgcnhelpchnceeipipijaljkblbcobl?utm_source=chrome-ntp-icon">for Chrome</a></li>-->
-					<li>Webapp<br/><a target=”_blank” href="https://marketplace.mozilla.org/app/gauth-authenticator/">Mozilla Marketplace</a></li>
-					<li>Source code<br/><a target=”_blank” href="http://github.com/gbraad/html5-google-authenticator">http://github.com/gbraad/html5-google-authenticator</a></li>
-					<li>Thanks to Russell Sayers<br/><a target=”_blank” href="http://blog.tinisles.com/2011/10/google-authenticator-one-time-password-algorithm-in-javascript/">TOTP Algorithm</a></li>
-				</ul></p>
-				<p>For more details or if you have suggestions, please do not hesitate to contact me at <a href="mailto:me@gbraad.nl?subject=gauth+authenticator">me@gbraad.nl</a>.<br/><br/>
-					<a target=”_blank” href="https://flattr.com/thing/717982/GAuth-Authenticator"><img src="img/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
-				</p>
-			</div>
+		<div id="deleteAccount" data-account-id="">
+            <h1 class="page-header">Delete account</h1>
+            <p>Are you sure you want to delete this account? This cannot be undone.</p>
+            <button type="button" class="btn btn-danger" id="delete">
+                <span class="glyphicon glyphicon-remove"></span>
+                Yes, delete it!
+            </button>
+            <button type="button" class="btn btn-default cancel">Cancel</button>
+        </div>
+
+		<div id="about">
+            <h1 class="page-header">About</h1>
+            <p>A simple application for multi-factor authentication, written in HTML using jQuery Mobile (and PhoneGap), jsSHA and Chrome Storage</p>
+            <p><ul>
+                <li>Learn why<br/><a target=”_blank” href="http://lifehacker.com/5932700/please-turn-on-two+factor-authentication">Please, turn on two-factor authentication</a></li>
+                <li>Online<br/><a target=”_blank” href="http://gauth.apps.gbraad.nl/">http://gauth.apps.gbraad.nl/</a></li>
+                <li>Application<br/><a target=”_blank” href="https://build.phonegap.com/apps/135419/">for Android</a></li>
+                <!--<li>Extension<br/><a target=”_blank” href="https://chrome.google.com/webstore/detail/ilgcnhelpchnceeipipijaljkblbcobl?utm_source=chrome-ntp-icon">for Chrome</a></li>-->
+                <li>Webapp<br/><a target=”_blank” href="https://marketplace.mozilla.org/app/gauth-authenticator/">Mozilla Marketplace</a></li>
+                <li>Source code<br/><a target=”_blank” href="http://github.com/gbraad/html5-google-authenticator">http://github.com/gbraad/html5-google-authenticator</a></li>
+                <li>Thanks to Russell Sayers<br/><a target=”_blank” href="http://blog.tinisles.com/2011/10/google-authenticator-one-time-password-algorithm-in-javascript/">TOTP Algorithm</a></li>
+            </ul></p>
+            <p>For more details or if you have suggestions, please do not hesitate to contact me at <a href="mailto:me@gbraad.nl?subject=gauth+authenticator">me@gbraad.nl</a>.<br/><br/>
+                <a target=”_blank” href="https://flattr.com/thing/717982/GAuth-Authenticator"><img src="img/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
+            </p>
+            <button type="button" class="btn btn-default cancel">Close</button>
+
 		</div>
-</body>
+		<input type="text" id="clipboard" />
+    </body>
 </html>

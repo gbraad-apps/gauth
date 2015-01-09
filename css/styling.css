@@ -1,19 +1,162 @@
-.ui-dialog-background {
-	opacity: 0.5;
-	display: block !important;
-	-webkit-transition: opacity 0.5s ease-in;
+/* Give dimensions to the pop-up */
+html {
+    min-width: 550px;
+    min-height: 400px !important;
 }
 
-.ui-dialog-background.pop.in {
-	opacity: 1;
-	-webkit-transition: opacity 0.5s ease-in;
+/* Styles for copying to the clipboard */
+#clipboard {
+    position: absolute;
+    left: -500px;
+}
+.copied {
+    display: none;
+    position: absolute;
+    width: 90%;
+    height: 50px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    background-color: #90D6F0;
+    border: 1px solid #2ad;
+    border-radius: 10px;
+    color: #2ad;
+    line-height: 50px;
+    font-size: 18px;
+    text-align: center;
+    z-index: 50;
+    opacity: 0.85;
 }
 
-div[data-role="footer"] {
-	display: none;
+div.header.row {
+    margin: 0;
+}
+div.header {
+    background-color: #1abc9c;
+    color: #fff;
+}
+div.header .add-container {
+    float: left;
+    margin-top: 18px;
+}
+div.header .about-container {
+    float: right;
+    margin-top: 18px;
+}
+div.header h1 {
+    text-align: center;
+}
+div.header .glyphicon {
+    font-size: 36px;
+    height: 36px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+div.header .glyphicon:hover {
+    text-shadow: 0px 0px 30px #fff;
+}
+#otpValues {
+    margin: 40px;
+    text-align: center;
+}
+.header-left, .header-right {
+    display: inline-block;
+    color: #fff;
+    padding: 15px;
+    font-size: 25px;
+}
+.header-left {
+    background-color: #3498DB;
+    border-top-left-radius: 10px;
+    width: 300px;
+}
+.header-right {
+    background-color: #2980B9;
+    border-top-right-radius: 10px;
+    width: 100px;
+}
+#accountsHeader {
+    position: relative;
+    width: 400px;
+    margin: auto;
+}
+#timebar {
+    position: absolute;
+    background-color: #FFFEA5;
+    width: 80%;
+    height: 5px;
+    z-index: 10;
+    bottom: 0;
+}
+#accounts {
+    list-style-type: none;
+    width: 400px;
+    margin: 0 auto;
+    padding: 0;
+}
+#accounts li {
+    color: #fff;
+    padding: 0;
+    position: relative;
+}
+#accounts h3, #accounts p {
+    margin: 0;
+    padding: 3px;
+}
+#accounts li:nth-child(odd) {
+    background: #ECF0F1;
+}
+#accounts li:nth-child(even) {
+    background: #CDE5E7;
+}
+#accounts li:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+#accounts li:last-child .delLink {
+    border-bottom-right-radius: 10px;
+}
+.otp {
+    width: 300px;
+    position: relative;
+    color: #597CA5;
+    cursor: pointer;
+}
+.delLink {
+    background-color: #DEE1E2;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    width: 100px;
+    font-size: 25px;
+    line-height: 61px;
+    right: 0;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.delLink:hover {
+    background-color: #C9CBCB;
+    text-shadow: 0px 0px 16px #FFFFFF;
 }
 
-#accounts h3 {
-	font-family: monospace;
-	font-size: 200%;
+.ui-dialog {
+    box-shadow: 0 20px 29px #666;
+}
+.ui-dialog-titlebar {
+    display: none;
+}
+.ui-tooltip {
+    background: #F1C40F;
+    color: #fff;
+    border: none;
+    padding: 0;
+    opacity: 1;
+}
+.ui-tooltip-content {
+    position: relative;
+    padding: 1em;
+    width: 140px;
+    text-align: center;
 }

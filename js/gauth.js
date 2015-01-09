@@ -16,31 +16,77 @@
 
 (function(exports) {
 	"use strict";
+    var lastUpdate;
 
-	var StorageService = function() {
-		var setObject = function(key, value) {
-			localStorage.setItem(key, JSON.stringify(value));
-		};
+    var StorageService = function() {
 
-		var getObject = function(key) {
-			var value = localStorage.getItem(key);
-			// if(value) return parsed JSON else undefined
-			return value && JSON.parse(value);
-		};
+        var setObject = function(key, value, callback) {
+            if (this.storageType() === "chrome") {
+                var valueObj = {};
+                valueObj[key] = value;
+                chrome.storage.sync.set(valueObj, function() {
+                    callback();
+                });
+            }
+            else if (this.storageType() === "localStorage") {
+                localStorage.setItem(key, JSON.stringify(value));
+                callback();
+            }
+            else {
+                throw new Error("Invalid storage type");
+            }
+        };
 
-		var isSupported = function() {
-			return typeof (Storage) !== "undefined";
-		};
+        var getObject = function(key, callback) {
+            if (this.storageType() === "chrome") {
+                chrome.storage.sync.get(key, function(result) {
+                    callback(result);
+                });
+            }
+            else if (this.storageType() === "localStorage", callback) {
+                var obj = JSON.parse(localStorage.getItem(key));
+                if (obj != null) {
+                    var result = {};
+                    result[key] = JSON.parse(localStorage.getItem(key));
+                }
+                else {
+                    result = obj;
+                }
+                callback(result);
+            }
+            else {
+                throw new Error("Invalid storage type");
+            }
+        };
 
-		// exposed functions
-		return {
-			isSupported: isSupported,
-			getObject: getObject,
-			setObject: setObject
-		};
-	};
+        var isSupported = function() {
+            return (typeof (Storage) !== "undefined"
+                || typeof (chrome.storage) !== "undefined");
+        };
 
-	exports.StorageService = StorageService;
+        var storageType = function() {
+//             return "localStorage";
+            if (typeof (chrome.storage) !== "undefined") {
+                return "chrome";
+            }
+            else if (typeof (Storage) !== "undefined") {
+                return "localStorage";
+            }
+            else {
+                return null;
+            }
+        };
+
+        // exposed functions
+        return {
+            isSupported: isSupported,
+            getObject: getObject,
+            setObject: setObject,
+            storageType: storageType
+        };
+    };
+
+    exports.StorageService = StorageService;
 
 	// Originally based on the JavaScript implementation as provided by Russell Sayers on his Tin Isles blog:
 	// http://blog.tinisles.com/2011/10/google-authenticator-one-time-password-algorithm-in-javascript/
@@ -111,23 +157,27 @@
 
 	// ----------------------------------------------------------------------------
 	var KeysController = function() {
-		var storageService = null,
-			keyUtilities = null;
+        var storageService = null;
+        var keyUtilities = null;
 
 		var init = function() {
-			storageService = new StorageService();
+            storageService = new StorageService();
 			keyUtilities = new KeyUtilities(jsSHA);
 
-			// Check if local storage is supported
+			// Check if chrome.storage is supported
 			if (storageService.isSupported()) {
-				if (!storageService.getObject('accounts')) {
-					addAccount('alice@google.com', 'JBSWY3DPEHPK3PXP');
-				}
-
-				updateKeys();
-				setInterval(timerTick, 1000);
+                storageService.getObject('accounts', function(result) {
+                    if (result == null || !result.hasOwnProperty("accounts")) {
+                        addAccount('alice@google.com', 'JBSWY3DPEHPK3PXP');
+                    }
+                    else {
+                        updateKeys();
+                    }
+                    setInterval(timerTick, 100);
+                    setInterval(timerBar, 50);
+                });
 			} else {
-				// No support for localStorage
+				// No support for chrome.storage
 				$('#updatingIn').text("x");
 				$('#accountsHeader').text("No Storage support");
 			}
@@ -140,6 +190,7 @@
 				secret = secret.replace(/ /g, '');
 				if(secret !== '') {
 					addAccount(name, secret);
+                    $( "#addAccount" ).dialog("close");
 				}
 			});
 		};
@@ -147,31 +198,63 @@
 		var updateKeys = function() {
 			var accountList = $('#accounts');
 			// Remove all except the first line
-			accountList.find("li:gt(0)").remove();
+			accountList.find("li").remove();
 
-			$.each(storageService.getObject('accounts'), function (index, account) {
-				var key = keyUtilities.generate(account.secret);
+            storageService.getObject('accounts', function(result) {
+                if (result != null && result.hasOwnProperty("accounts")) {
+                    $.each(result.accounts, function (index, account) {
+                        var key = keyUtilities.generate(account.secret);
+                        var copConf;
 
-				// Construct HTML
-				var delLink = $('<a href="#"></a>');
-				delLink.click(function () {
-					deleteAccount(index);
-				});
-				var detLink = $('<a href="#"><h3>' + key + '</h3><p>' + account.name + '</p></a>');
-				var accElem = $('<li>').append(detLink).append(delLink);
-				// Add HTML element
-				accountList.append(accElem);
-			});
-			accountList.listview().listview('refresh');
+                        // Construct HTML
+                        var delLink = $('<div class="glyphicon glyphicon-remove-circle delLink jqueryui-tooltip" title="Click to delete"></div>');
+                        delLink.click(function () {
+                            $("#deleteAccount")
+                                .dialog("open")
+                                .attr("data-account-id", index);
+                        });
+                        var detLink = $('<div class="otp"><h3>' + key + '</h3><p>' + account.name + '</p></div>');
+
+                        // We can copy to the clipboard in Chrome extensions
+                        if (location.protocol == "chrome-extension:") {
+                            detLink.addClass("jqueryui-tooltip")
+                                .attr("title", "Click to copy")
+
+                            copConf = $('<div class="copied">&#x2713; Copied to the clipboard</div>');
+                            // Copy to clipboard on click
+                            $( detLink ).click(function() {
+                                var otp = $(this).find("h3").text();
+                                $("#clipboard")
+                                    .val(otp)
+                                    .focus()
+                                    .select();
+                                document.execCommand('cut');
+                                $(this).parent().find('.copied')
+                                    .fadeIn(200)
+                                    .delay(1000)
+                                    .fadeOut(500);
+
+                            });
+                        }
+                        var accElem = $('<li>').append(detLink).append(delLink).append(copConf);
+                        // Add HTML element
+                        accountList.append(accElem);
+                    });
+                }
+                $(".jqueryui-tooltip").tooltip();
+            });
 		};
 
 		var deleteAccount = function(index) {
-			// Remove object by index
-			var accounts = storageService.getObject('accounts');
-			accounts.splice(index, 1);
-			storageService.setObject('accounts', accounts);
+            storageService.getObject('accounts', function(result) {
+                // Remove object by index
+                var accounts = result.accounts;
+                accounts.splice(index, 1);
 
-			updateKeys();
+                storageService.setObject('accounts', accounts, function() {
+                    updateKeys();
+                });
+            });
 		};
 
 		var addAccount = function(name, secret) {
@@ -187,19 +270,22 @@
 			};
 
 			// Persist new object
-			var accounts = storageService.getObject('accounts');
-			if (!accounts) {
-				// if undefined create a new array
-				accounts = [];
-			}
-			accounts.push(account);
-			storageService.setObject('accounts', accounts);
+            storageService.getObject('accounts', function(result) {
+                var accounts = [];
+                if (result != null && result.hasOwnProperty("accounts")) {
+                    accounts = result.accounts;
+                }
 
-			// Empty fields
-			$('#keyAccount').val('');
-			$('#keySecret').val('');
+                accounts.push(account);
+                storageService.setObject('accounts', accounts, function() {
+                    // Empty fields
+                    $('#keyAccount').val('');
+                    $('#keySecret').val('');
 
-			updateKeys();
+                    updateKeys();
+                });
+            });
+
 
 			return true;
 		};
@@ -207,11 +293,18 @@
 		var timerTick = function() {
 			var epoch = Math.round(new Date().getTime() / 1000.0);
 			var countDown = 30 - (epoch % 30);
-			if (epoch % 30 === 0) {
+			if (epoch % 30 === 0 && epoch != lastUpdate) {
+                lastUpdate = epoch;
 				updateKeys();
 			}
 			$('#updatingIn').text(countDown);
 		};
+
+        var timerBar = function() {
+            var epoch = new Date().getTime() / 1000.0;
+            var countDown = 30 - (epoch % 30);
+            $('#timebar').css("width", (countDown / 30) * 100 + "%");
+        };
 
 		return {
 			init: init,
