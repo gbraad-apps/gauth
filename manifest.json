@@ -1,0 +1,18 @@
+{
+   "manifest_version": 2,
+   "name": "GAuth Authenticator",
+   "description": "This application generates TOTP tokens for multi-factor authentication used by Google, Dropbox, Amazon and many others.",
+   "version": "35.9",
+   "icons": {
+      "512": "img/icon_512.png",
+      "128": "img/icon_128.png",
+      "16": "img/icon_16.png",
+      "48": "img/icon_48.png"
+   },
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "app": {
+       "background": {
+           "scripts": [ "js/chrome_app.js" ]
+       }
+   }
+}
