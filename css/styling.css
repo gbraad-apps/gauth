@@ -17,3 +17,10 @@ div[data-role="footer"] {
 	font-family: monospace;
 	font-size: 200%;
 }
+
+#panelheader {
+	background-color: #1593f9;
+	border: none;
+	color: #ffffff;
+	text-shadow: 0 1px 0 #0857c4;
+}
