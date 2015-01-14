@@ -18,6 +18,10 @@ div[data-role="footer"] {
 	font-size: 200%;
 }
 
+.ui-panel {
+	background-color: #f9f9f9;
+}
+
 #panelheader {
 	background-color: #1593f9;
 	border: none;

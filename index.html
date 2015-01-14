@@ -24,12 +24,13 @@
 	</head>
 	<body>
 
-	    <div data-role="panel" id="panel" data-position="left" data-theme="a" data-display="push">
+	    <div data-role="panel" id="panel" data-position="left" data-theme="a" data-display="overlay">
             <ul data-role="listview">
                 <li><a id="panelheader" href="#main" data-rel="close">Main menu</a></li>
-                <li><a href="#add" data-rel="close">Add</a></li>
-                <li><a href="#settings" data-rel="close">Settings</a></li>
-                <li><a href="#about" data-rel="close">About</a></li>
+                <li><a href="#main" data-rel="close">Keys</a></li>
+                <li data-icon="plus"><a href="#add" data-rel="close">Add</a></li>
+                <!--<li data-icon="gear"><a href="#settings"data-rel="close">Settings</a></li>-->
+                <li data-icon="info"><a href="#about" data-rel="close">About</a></li>
             </ul>
         </div>
 
@@ -52,7 +53,7 @@
 		<div data-role="page" id="add" data-theme="a">
 			<div data-role="header">
 				<h1>Add account</h1>
-				<a href="#main" data-role="button" data-rel="page" data-icon="back" data-iconpos="notext">Back</a>
+				<a href="#panel" data-role="button" data-iconpos="notext" data-icon="bars" data-iconpos="notext">Menu</a>
 			</div>
 			<div data-role="content">
 				<p>
@@ -75,7 +76,7 @@
 		<div data-role="page" id="settings" data-theme="a">
 			<div data-role="header">
 				<h1>Settings</h1>
-				<a href="#main" data-role="button" data-rel="page" data-icon="back" data-iconpos="notext">Back</a>
+				<a href="#panel" data-role="button" data-iconpos="notext" data-icon="bars" data-iconpos="notext">Menu</a>
 			</div>
 			<div data-role="content">
 				<p>
@@ -92,7 +93,7 @@
 		<div data-role="page" id="about" data-theme="a">
 			<div data-role="header">
 				<h1>About</h1>
-				<a href="#main" data-role="button" data-rel="page" data-icon="back" data-iconpos="notext">Back</a>
+				<a href="#panel" data-role="button" data-iconpos="notext" data-icon="bars" data-iconpos="notext">Menu</a>
 			</div>
 			<div data-role="content">
 				<p>A simple application for multi-factor authentication, written in HTML using jQuery Mobile (and PhoneGap), jsSHA and LocalStorage</p>
