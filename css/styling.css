@@ -17,3 +17,24 @@ div[data-role="footer"] {
 	font-family: monospace;
 	font-size: 200%;
 }
+
+.ui-panel {
+	background-color: #f9f9f9;
+}
+
+#panelheader {
+	background-color: #1593f9;
+	border: none;
+	color: #ffffff;
+	text-shadow: 0 1px 0 #0857c4;
+}
+
+.header-icon {
+	/* quick-n-dirty fix */
+	background: #1593f9 !important;
+    border-color: #1593f9 !important;
+    color: #fff;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}

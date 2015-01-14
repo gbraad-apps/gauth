@@ -24,27 +24,36 @@
 	</head>
 	<body>
 
+	    <div data-role="panel" id="panel" data-position="left" data-theme="a" data-display="overlay">
+            <ul data-role="listview">
+                <li><a id="panelheader" href="#main" data-rel="close">Main menu</a></li>
+                <li data-icon="lock"><a href="#main" data-rel="close">Keys</a></li>
+                <li data-icon="plus"><a href="#add" data-rel="close">Add</a></li>
+                <!--<li data-icon="gear"><a href="#settings"data-rel="close">Settings</a></li>-->
+                <li data-icon="info"><a href="#about" data-rel="close">About</a></li>
+            </ul>
+        </div>
+
 		<div data-role="page" id="main" data-theme="a">
 			<div data-role="header">
 				<h1>GAuth Authenticator</h1>
-				<a href="#settings" data-role="button" data-rel="dialog" data-icon="plus" data-iconpos="notext">Settings</a>
-				<a href="#about" data-role="button" data-rel="dialog" data-icon="info" data-iconpos="notext">About</a>
+				<a href="#panel" class="header-icon" data-role="button" data-iconpos="notext" data-icon="bars" data-iconpos="notext">Menu</a>
 			</div>
 
 			<div data-role="content">
-				<ul data-role="listview" data-inset="true" data-theme="a"  data-split-theme="a" data-split-icon="delete" id="accounts">
+				<ul data-role="listview" data-inset="true" data-theme="a" data-split-theme="a" data-split-icon="delete" id="accounts">
 					<li id="accountsHeader" data-role="list-divider">One-time passwords<span class="ui-li-count" id='updatingIn'>..</span></li>
 				</ul>
 			</div>
-
 			<div data-role="footer">
 				<h1>@gbraad</h1>
 			</div>
 		</div>
 
-		<div data-role="dialog" id="settings" data-theme="a">
+		<div data-role="page" id="add" data-theme="a">
 			<div data-role="header">
-				<h1>Settings</h1>
+				<h1>Add account</h1>
+				<a href="#panel" class="header-icon" data-role="button" data-iconpos="notext" data-icon="bars" data-iconpos="notext">Menu</a>
 			</div>
 			<div data-role="content">
 				<p>
@@ -64,9 +73,27 @@
 			</div>
 		</div>
 
-		<div data-role="dialog" id="about" data-theme="a">
+		<div data-role="page" id="settings" data-theme="a">
+			<div data-role="header">
+				<h1>Settings</h1>
+				<a href="#panel" class="header-icon" data-role="button" data-iconpos="notext" data-icon="bars" data-iconpos="notext">Menu</a>
+			</div>
+			<div data-role="content">
+				<p>
+					
+				</p>
+				<p>
+					<div data-role="controlgroup" data-type="horizontal">
+						<a href="#main" data-role="button" data-rel="back" data-theme="a">Cancel</a>
+					</div>
+				</p>
+			</div>
+		</div>
+
+		<div data-role="page" id="about" data-theme="a">
 			<div data-role="header">
 				<h1>About</h1>
+				<a href="#panel" class="header-icon" data-role="button" data-iconpos="notext" data-icon="bars" data-iconpos="notext">Menu</a>
 			</div>
 			<div data-role="content">
 				<p>A simple application for multi-factor authentication, written in HTML using jQuery Mobile (and PhoneGap), jsSHA and LocalStorage</p>
@@ -84,5 +111,6 @@
 				</p>
 			</div>
 		</div>
-</body>
+				
+    </body>
 </html>
