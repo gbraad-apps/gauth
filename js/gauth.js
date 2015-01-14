@@ -153,12 +153,18 @@
 				var key = keyUtilities.generate(account.secret);
 
 				// Construct HTML
-				var delLink = $('<a href="#"></a>');
-				delLink.click(function () {
-					deleteAccount(index);
-				});
 				var detLink = $('<a href="#"><h3>' + key + '</h3><p>' + account.name + '</p></a>');
-				var accElem = $('<li>').append(detLink).append(delLink);
+				var accElem = $('<li>').append(detLink);
+
+				/*
+				if(deleteEnabled){
+					var delLink = $('<a data-icon="delete" href="#"></a>');
+					delLink.click(function () {
+						deleteAccount(index);
+					});
+					accElem.append(delLink);
+				}*/
+
 				// Add HTML element
 				accountList.append(accElem);
 			});
