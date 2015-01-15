@@ -144,9 +144,8 @@
 				}
 			});
 
-			$('#edit').click(function() {
-				toggleEdit();
-			});
+            $('#edit').click(function() { toggleEdit(); });
+            $('#export').click(function() { exportAccounts(); });
 		};
 
 		var updateKeys = function() {
@@ -183,6 +182,13 @@
                 $('#addButton').hide();
             }
             updateKeys();
+        };
+
+        var exportAccounts = function() {
+            var expElem = document.createElement('a');
+            expElem.setAttribute('href', 'data:text/plain;charset=utf-8,' + storageService.getObject('accounts'));
+            expElem.setAttribute('download', "gauth-export.json");
+            expElem.click();
         };
 
 		var deleteAccount = function(index) {
