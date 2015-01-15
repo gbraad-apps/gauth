@@ -176,12 +176,14 @@
 		};
 
         var toggleEdit = function() {
-        	editingEnabled = !editingEnabled;
-        	
-			editingEnabled ? $('#addButton').show() : $('#addButton').hide();
-        	
-        	updateKeys();
-        }
+            editingEnabled = !editingEnabled;
+            if(editingEnabled) {
+                $('#addButton').show();
+            } else {
+                $('#addButton').hide();
+            }
+            updateKeys();
+        };
 
 		var deleteAccount = function(index) {
 			// Remove object by index
