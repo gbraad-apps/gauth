@@ -22,6 +22,12 @@ div[data-role="footer"] {
 	background-color: #f9f9f9;
 }
 
+.ui-corner-all {
+   -webkit-border-radius: .0 !important;
+   -moz-border-radius: .0 !important;
+   border-radius: 0 !important;
+}
+
 #panelheader {
 	background-color: #1593f9;
 	border: none;
@@ -37,4 +43,8 @@ div[data-role="footer"] {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+}
+
+#addButton {
+	display: none;
 }

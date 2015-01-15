@@ -28,7 +28,7 @@
             <ul data-role="listview">
                 <li><a id="panelheader" href="#main" data-rel="close">Main menu</a></li>
                 <li data-icon="lock"><a href="#main" data-rel="close">Keys</a></li>
-                <li data-icon="plus"><a href="#add" data-rel="close">Add</a></li>
+                <!--<li data-icon="plus"><a href="#add" data-rel="close">Add</a></li>-->
                 <!--<li data-icon="gear"><a href="#settings"data-rel="close">Settings</a></li>-->
                 <li data-icon="info"><a href="#about" data-rel="close">About</a></li>
             </ul>
@@ -38,12 +38,15 @@
 			<div data-role="header">
 				<h1>GAuth Authenticator</h1>
 				<a href="#panel" class="header-icon" data-role="button" data-iconpos="notext" data-icon="bars" data-iconpos="notext">Menu</a>
+				<a id="edit" class="header-icon" data-role="button" data-iconpos="notext" data-icon="edit" data-iconpos="notext">Edit</a>
 			</div>
 
 			<div data-role="content">
 				<ul data-role="listview" data-inset="true" data-theme="a" data-split-theme="a" data-split-icon="delete" id="accounts">
 					<li id="accountsHeader" data-role="list-divider">One-time passwords<span class="ui-li-count" id='updatingIn'>..</span></li>
 				</ul>
+
+				<a id="addButton" href="#add" class="ui-btn ui-icon-plus ui-btn-icon-left">Add</a>
 			</div>
 			<div data-role="footer">
 				<h1>@gbraad</h1>

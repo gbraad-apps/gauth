@@ -112,7 +112,8 @@
 	// ----------------------------------------------------------------------------
 	var KeysController = function() {
 		var storageService = null,
-			keyUtilities = null;
+			keyUtilities = null,
+			editingEnabled = false;
 
 		var init = function() {
 			storageService = new StorageService();
@@ -142,6 +143,10 @@
 					addAccount(name, secret);
 				}
 			});
+
+			$('#edit').click(function() {
+				toggleEdit();
+			});
 		};
 
 		var updateKeys = function() {
@@ -154,10 +159,9 @@
 
 				// Construct HTML
 				var detLink = $('<a href="#"><h3>' + key + '</h3><p>' + account.name + '</p></a>');
-				var accElem = $('<li>').append(detLink);
+				var accElem = $('<li data-icon="false">').append(detLink);
 
-				var deleteEnabled = true; /* will be removed */
-				if(deleteEnabled) {
+				if(editingEnabled) {
 					var delLink = $('<a data-icon="delete" href="#"></a>');
 					delLink.click(function () {
 						deleteAccount(index);
@@ -170,6 +174,14 @@
 			});
 			accountList.listview().listview('refresh');
 		};
+
+        var toggleEdit = function() {
+        	editingEnabled = !editingEnabled;
+        	
+			editingEnabled ? $('#addButton').show() : $('#addButton').hide();
+        	
+        	updateKeys();
+        }
 
 		var deleteAccount = function(index) {
 			// Remove object by index
