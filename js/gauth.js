@@ -18,6 +18,15 @@
 	"use strict";
 
 	var StorageService = function() {
+
+		var getStorageBackend = function() {
+			if(chrome && chrome.storage) {
+				return chrome.storage.local;
+			}
+			return window.storage;
+		};
+		var localStorage = getStorageBackend();
+
 		var setObject = function(key, value) {
 			localStorage.setItem(key, JSON.stringify(value));
 		};
@@ -144,8 +153,8 @@
 				}
 			});
 
-            $('#edit').click(function() { toggleEdit(); });
-            $('#export').click(function() { exportAccounts(); });
+			$('#edit').click(function() { toggleEdit(); });
+			$('#export').click(function() { exportAccounts(); });
 		};
 
 		var updateKeys = function() {
@@ -174,23 +183,23 @@
 			accountList.listview().listview('refresh');
 		};
 
-        var toggleEdit = function() {
-            editingEnabled = !editingEnabled;
-            if(editingEnabled) {
-                $('#addButton').show();
-            } else {
-                $('#addButton').hide();
-            }
-            updateKeys();
-        };
+		var toggleEdit = function() {
+			editingEnabled = !editingEnabled;
+			if(editingEnabled) {
+				$('#addButton').show();
+			} else {
+				$('#addButton').hide();
+			}
+			updateKeys();
+		};
 
-        var exportAccounts = function() {
-            var accounts = JSON.stringify(storageService.getObject('accounts'));
-            var expElem = document.createElement('a');
-            expElem.setAttribute('href', 'data:text/plain;charset=utf-8,' + accounts);
-            expElem.setAttribute('download', "gauth-export.json");
-            expElem.click();
-        };
+		var exportAccounts = function() {
+			var accounts = JSON.stringify(storageService.getObject('accounts'));
+			var expElem = document.createElement('a');
+			expElem.setAttribute('href', 'data:text/plain;charset=utf-8,' + accounts);
+			expElem.setAttribute('download', "gauth-export.json");
+			expElem.click();
+		};
 
 		var deleteAccount = function(index) {
 			// Remove object by index

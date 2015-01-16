@@ -14,5 +14,8 @@
        "background": {
            "scripts": [ "js/chrome_app.js" ]
        }
-   }
+   },
+   "permissions": [
+       "storage"
+   ]
 }
