@@ -185,8 +185,9 @@
         };
 
         var exportAccounts = function() {
+            var accounts = JSON.stringify(storageService.getObject('accounts'));
             var expElem = document.createElement('a');
-            expElem.setAttribute('href', 'data:text/plain;charset=utf-8,' + storageService.getObject('accounts'));
+            expElem.setAttribute('href', 'data:text/plain;charset=utf-8,' + accounts);
             expElem.setAttribute('download', "gauth-export.json");
             expElem.click();
         };
