@@ -79,6 +79,7 @@ div.header .glyphicon:hover {
   margin: 2em auto;
   text-align: center;
   width: 25em;
+  max-width: 100%;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 0.5em 1em #777;
