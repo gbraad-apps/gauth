@@ -1,5 +1,5 @@
-GAuth Authenticator
-===================
+GAuth
+=====
 
 [![Build Status](https://travis-ci.org/gbraad/html5-google-authenticator.svg?branch=master)](https://travis-ci.org/gbraad/html5-google-authenticator)
 [![Build Status](https://drone.io/github.com/gbraad/html5-google-authenticator/status.png)](https://drone.io/github.com/gbraad/html5-google-authenticator/latest)
