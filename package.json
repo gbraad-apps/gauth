@@ -1,6 +1,6 @@
 {
   "name": "html5-gauth",
-  "version": "0.0.1",
+  "version": "0.9.5",
   "description": "simple application for muti-factor authentication",
   "keywords": [
     "totp",
