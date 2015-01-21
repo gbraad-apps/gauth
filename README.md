@@ -20,7 +20,13 @@ Dropbox, Dreamhost, Amazon, Linode, Okta and many other services.
 * [5Apps packaged apps](https://5apps.com/gbraad/gauth "5Apps packages") for Chrome and Firefox
 * [PhoneGap builds](http://build.phonegap.com/apps/135419/share "PhoneGap Build") for WebOS and Android
 
-More information can be found in the about dialog.
+More information can be found in the about dialog and the [wiki](https://github.com/gbraad/html5-google-authenticator/wiki "GAuth wiki").
+
+
+Hosting
+-------
+
+To self-host a version of this application you can do so by just serving the files using Apache or nginx. For easy deployment, there is also a server.js node application which can be hosted from a nodejs 0.10-based container. This has been tested on Heroku/Dokku and OpenShift.
 
 
 Authors
