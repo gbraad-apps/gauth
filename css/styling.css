@@ -1,25 +1,25 @@
 .ui-dialog-background {
-	opacity: 0.5;
-	display: block !important;
-	-webkit-transition: opacity 0.5s ease-in;
+    opacity: 0.5;
+    display: block !important;
+    -webkit-transition: opacity 0.5s ease-in;
 }
 
 .ui-dialog-background.pop.in {
-	opacity: 1;
-	-webkit-transition: opacity 0.5s ease-in;
+    opacity: 1;
+    -webkit-transition: opacity 0.5s ease-in;
 }
 
 div[data-role="footer"] {
-	display: none;
+    display: none;
 }
 
 #accounts h3 {
-	font-family: monospace;
-	font-size: 200%;
+    font-family: monospace;
+    font-size: 200%;
 }
 
 .ui-panel {
-	background-color: #f9f9f9;
+    background-color: #f9f9f9;
 }
 
 .ui-corner-all {
@@ -29,15 +29,15 @@ div[data-role="footer"] {
 }
 
 #panelheader {
-	background-color: #1593f9;
-	border: none;
-	color: #ffffff;
-	text-shadow: 0 1px 0 #0857c4;
+    background-color: #1593f9;
+    border: none;
+    color: #ffffff;
+    text-shadow: 0 1px 0 #0857c4;
 }
 
 .header-icon {
-	/* quick-n-dirty fix */
-	background: #1593f9 !important;
+    /* quick-n-dirty fix */
+    background: #1593f9 !important;
     border-color: #1593f9 !important;
     color: #fff;
     -webkit-box-shadow: none;
@@ -46,5 +46,5 @@ div[data-role="footer"] {
 }
 
 #addButton {
-	display: none;
+    display: none;
 }
