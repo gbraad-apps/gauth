@@ -134,14 +134,17 @@
             }
 
             // Bind to keypress event for the input
-            $('#add').click(function () {
+            $('#addKeyButton').click(function () {
                 var name = $('#keyAccount').val();
                 var secret = $('#keySecret').val();
                 // remove spaces from secret
                 secret = secret.replace(/ /g, '');
                 if(secret !== '') {
                     addAccount(name, secret);
-                }
+                    $.mobile.navigate('#main');
+                } else {
+		    $('#keySecret').focus();
+		}
             });
 
             $('#edit').click(function() { toggleEdit(); });
