@@ -134,18 +134,28 @@
             }
 
             // Bind to keypress event for the input
-            $('#addKeyButton').click(function () {
+            $('#addKeyButton').click(function() {
                 var name = $('#keyAccount').val();
                 var secret = $('#keySecret').val();
                 // remove spaces from secret
                 secret = secret.replace(/ /g, '');
                 if(secret !== '') {
                     addAccount(name, secret);
+                    clearAddFields();
                     $.mobile.navigate('#main');
                 } else {
-		    $('#keySecret').focus();
+                    $('#keySecret').focus();
 		}
             });
+
+            $('#addKeyCancel').click(function() {
+                clearAddFields();
+            });
+
+            var clearAddFields = function() {
+                $('#keyAccount').val('');
+		$('#keySecret').val('');
+            };
 
             $('#edit').click(function() { toggleEdit(); });
             $('#export').click(function() { exportAccounts(); });
@@ -224,10 +234,6 @@
             }
             accounts.push(account);
             storageService.setObject('accounts', accounts);
-
-            // Empty fields
-            $('#keyAccount').val('');
-            $('#keySecret').val('');
 
             updateKeys();
 
