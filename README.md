@@ -1,7 +1,7 @@
 GAuth
 =====
 
-[![Build Status](https://travis-ci.org/gbraad/html5-google-authenticator.svg?branch=master)](https://travis-ci.org/gbraad/html5-google-authenticator)
+[![Build Status](https://travis-ci.org/gbraad/gauth.svg?branch=master)](https://travis-ci.org/gbraad/html5-google-authenticator)
 [![Build Status](https://drone.io/github.com/gbraad/html5-google-authenticator/status.png)](https://drone.io/github.com/gbraad/html5-google-authenticator/latest)
 [![Stories in Ready](https://badge.waffle.io/gbraad/html5-google-authenticator.png?label=ready&title=Ready)](https://waffle.io/gbraad/html5-google-authenticator)
 [![Code Climate](https://codeclimate.com/github/gbraad/html5-google-authenticator/badges/gpa.svg)](https://codeclimate.com/github/gbraad/html5-google-authenticator)
