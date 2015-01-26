@@ -13,14 +13,14 @@ jQuery Mobile, jsSHA, LocalStorage and Application Cache. It implements RFC4226
 Dropbox, Dreamhost, Amazon, Linode, Okta and many other services.
 
 
-* [Supported services](https://github.com/gbraad/html5-google-authenticator/wiki/Supported-services)
+* [Supported services](https://github.com/gbraad/gauth/wiki/Supported-services)
 * [Hosted web application](http://gauth.apps.gbraad.nl "Hosted web application")
 * [Hosted](https://marketplace.firefox.com/app/gauth-authenticator "Firefox Web Application") and [Packaged](https://marketplace.firefox.com/app/gauth-authenticator-packaged/ "Firefox Packaged Application") application for Firefox and Firefox OS
 * [Application](https://chrome.google.com/webstore/detail/gauth-authenticator/jcmgkikfgdbehjdajjdnebnnmmknfblm "Chrome application") and [Extension](https://chrome.google.com/webstore/detail/ilgcnhelpchnceeipipijaljkblbcobl "Chrome extension") for Chrome and Chrome OS
 * [5Apps packaged apps](https://5apps.com/gbraad/gauth "5Apps packages") for Chrome and Firefox
 * [PhoneGap builds](http://build.phonegap.com/apps/135419/share "PhoneGap Build") for WebOS and Android
 
-More information can be found in the about dialog and the [wiki](https://github.com/gbraad/html5-google-authenticator/wiki "GAuth wiki").
+More information can be found in the about dialog and the [wiki](https://github.com/gbraad/gauth/wiki "GAuth wiki").
 
 
 Hosting
@@ -54,7 +54,7 @@ Matěj Cepl
 Contact
 -------
 If you have problems with the application, please first consult the
-[Issue tracker](https://github.com/gbraad/html5-google-authenticator/issues "Issue tracker")
+[Issue tracker](https://github.com/gbraad/gauth/issues "Issue tracker")
 at Github. You can also send me an email, PM me on Freenode or drop by in the chatroom.
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gbraad/html5-google-authenticator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
