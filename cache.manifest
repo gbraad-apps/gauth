@@ -1,0 +1,19 @@
+CACHE MANIFEST
+# v0.9.7
+
+CACHE:
+css/images/ajax-loader.gif
+css/jquery.mobile-1.4.5.min.css
+css/jquery.mobile-custom.min.css
+css/styling.css
+img/flattr-badge-large.png
+index.html
+js/init.js
+js/gauth.js
+js/main.js
+lib/jquery-2.1.3.min.js
+lib/jquery.mobile-1.4.5.min.js
+lib/jssha-1.31.min.js
+
+NETWORK:
+*
