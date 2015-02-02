@@ -9,7 +9,7 @@
     -webkit-transition: opacity 0.5s ease-in;
 }
 
-div[data-role="footer"] {
+footer, div[data-role="footer"] {
     display: none;
 }
 
