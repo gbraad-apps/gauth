@@ -9,11 +9,11 @@
   "author": "Gerard Braad",
   "license": "GPL",
   "bugs": {
-    "url": "https://github.com/gbraad/html5-google-authenticator/issues"
+    "url": "https://github.com/gbraad/gauth/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/gbraad/html5-google-authenticator.git"
+    "url": "git://github.com/gbraad/gauth.git"
   },
   "main": "index.html",
   "window": {
