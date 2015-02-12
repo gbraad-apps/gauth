@@ -28,6 +28,8 @@ Hosting
 
 To self-host a version of this application you can do so by just serving the files using Apache or nginx. For easy deployment, there is also a server.js node application which can be hosted from a nodejs 0.10-based container. This has been tested on Heroku/Dokku and OpenShift.
 
+An experimental package for deployment on a local machine is availabe from [packager.io](https://packager.io/gh/gbraad/gauth/).
+
 
 Authors
 -------
