@@ -248,7 +248,7 @@
             }
             $('#updatingIn').text(countDown);
             if (countDown <= 10) {
-                $('ul#accounts li a').css('color', '#b00').fadeTo(100, 1).fadeTo(500, .5);
+                $('ul#accounts li a').css('color', '#b00').fadeTo(100, 1).fadeTo(500, 0.5);
             }
         };
 
