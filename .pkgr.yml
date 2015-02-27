@@ -1,0 +1,8 @@
+targets:
+  fedora-20:
+  debian-7:
+  ubuntu-12.04:
+  ubuntu-14.04:
+  sles-12:
+  centos-6:
+
