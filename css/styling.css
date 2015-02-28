@@ -18,6 +18,10 @@ footer, div[data-role="footer"] {
     font-size: 200%;
 }
 
+#accounts .expiring {
+    color: #b00;
+}
+
 .ui-panel {
     background-color: #f9f9f9;
 }
