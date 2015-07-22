@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "connect-livereload": "~0.3.2",
+    "cucumber": "^0.5.2",
     "expect.js": "~0.3.1",
     "express": "~3.4.8",
     "gulp": "~3.5.2",
