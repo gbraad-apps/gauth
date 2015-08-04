@@ -199,10 +199,9 @@
 
         var exportAccounts = function() {
             var accounts = JSON.stringify(storageService.getObject('accounts'));
-            var expElem = document.createElement('a');
-            expElem.setAttribute('href', 'data:text/plain;charset=utf-8,' + accounts);
-            expElem.setAttribute('download', "gauth-export.json");
-            expElem.click();
+            var blob = new Blob([accounts], {type: 'text/plain;charset=utf-8'});
+
+            saveAs(blob, 'gauth-export.json');
         };
 
         var deleteAccount = function(index) {
