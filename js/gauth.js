@@ -97,8 +97,8 @@
                 offset = hex2dec(hmac.substring(hmac.length - 1));
             }
 
-            var otp = (hex2dec(hmac.substr(offset * 2, 8)) & hex2dec('7fffffff')) + '';
-            return (otp).substr(otp.length - 6, 6).toString();
+            var otp = (hex2dec(hmac.substr(offset * 2, 8)) & hex2dec('7fffffff')) % 1000000 + '';
+            return Array(7 - otp.length).join('0') + otp;
         };
 
         // exposed functions
