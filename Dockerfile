@@ -1,4 +1,7 @@
-FROM node:0.10
+FROM alpine:latest
+MAINTAINER me@gbraad.nl
+
+RUN apk add --update nodejs
 
 COPY . /app
 RUN cd /app && npm install
