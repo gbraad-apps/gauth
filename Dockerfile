@@ -1,7 +1,5 @@
-FROM alpine:latest
+FROM mhart/alpine-node:0.10
 MAINTAINER me@gbraad.nl
-
-RUN apk add --update nodejs
 
 COPY . /app
 RUN cd /app && npm install
