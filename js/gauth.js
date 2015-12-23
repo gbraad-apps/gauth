@@ -84,7 +84,7 @@
             var key = base32tohex(secret);
 
             // HMAC generator requires secret key to have even number of nibbles
-            if (key.length % 2 != 0) {
+            if (key.length % 2 !== 0) {
                 key += '0';
             }
 
