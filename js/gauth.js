@@ -82,6 +82,12 @@
 
         var generate = function(secret, epoch) {
             var key = base32tohex(secret);
+
+            // HMAC generator requires secret key to have even number of nibbles
+            if (key.length % 2 != 0) {
+                key += '0';
+            }
+
             // If no time is given, set time as now
             if(typeof epoch === 'undefined') {
                 epoch = Math.round(new Date().getTime() / 1000.0);
