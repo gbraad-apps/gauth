@@ -165,12 +165,6 @@
 
             $('#edit').click(function() { toggleEdit(); });
             $('#export').click(function() { exportAccounts(); });
-            $('#accounts').sortable( {
-                'items': '> li:not(#accountsHeader)',
-                'disabled': true,
-                'start': function(event, ui) { ui.item.startPos = ui.item.index() - 1; },
-                'stop': function(event, ui) { moveAccount(ui.item.startPos, ui.item.index() - 1); }
-            } );
         };
 
         var updateKeys = function() {
@@ -191,7 +185,6 @@
                         deleteAccount(index);
                     });
                     accElem.append(delLink);
-                    detLink.css('cursor', 'ns-resize');
                 }
 
                 // Add HTML element
@@ -204,10 +197,8 @@
             editingEnabled = !editingEnabled;
             if(editingEnabled) {
                 $('#addButton').show();
-                $('#accounts').sortable('enable');
             } else {
                 $('#addButton').hide();
-                $('#accounts').sortable('disable');
             }
             updateKeys();
         };
@@ -252,14 +243,6 @@
             updateKeys();
 
             return true;
-        };
-
-        var moveAccount = function(from, to) {
-            var accounts = storageService.getObject('accounts');
-            accounts.splice(to, 0, accounts.splice(from, 1)[0]);
-            storageService.setObject('accounts', accounts);
-
-            updateKeys();
         };
 
         var timerTick = function() {
