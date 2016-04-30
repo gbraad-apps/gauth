@@ -1,4 +1,4 @@
-image: bradrydzewski/node:0.10
+image: mhart/alpine-node:0.10
 
 pages:
   script:
