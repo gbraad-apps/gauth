@@ -1,0 +1,14 @@
+image: bradrydzewski/node:0.10
+
+pages:
+  script:
+  - npm -d install
+  - npm test
+  - mkdir .public
+  - cp -r * .public
+  - mv .public public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
