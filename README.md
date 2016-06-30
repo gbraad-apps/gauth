@@ -1,6 +1,8 @@
 GAuth
 =====
 
+[!["GAuth"](https://raw.githubusercontent.com/gbraad/gauth/master/img/icon_64.png)](http://github.com/gbraad/gauth)
+
 [![Build Status](https://travis-ci.org/gbraad/gauth.svg?branch=master)](https://travis-ci.org/gbraad/html5-google-authenticator)
 [![Build Status](https://drone.io/github.com/gbraad/html5-google-authenticator/status.png)](https://drone.io/github.com/gbraad/html5-google-authenticator/latest)
 [![Stories in Ready](https://badge.waffle.io/gbraad/gauth.png?label=ready&title=Ready)](https://waffle.io/gbraad/gauth)
