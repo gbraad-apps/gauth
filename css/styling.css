@@ -48,3 +48,13 @@ footer, div[data-role="footer"] {
 #addButton {
     display: none;
 }
+
+.ui-listview .ui-li-aside {
+  height: 100%;
+  top: 0;
+}
+
+.ui-listview .ui-btn-icon-notext {
+  display: inline-block;
+  vertical-align: middle;
+}
