@@ -1,8 +1,12 @@
-FROM mhart/alpine-node:0.10
+FROM mhart/alpine-node:9.8
 MAINTAINER me@gbraad.nl
 
 COPY . /app
-RUN cd /app && npm install
+WORKDIR /app
 
-EXPOSE 4000
-CMD cd /app && node server
+RUN npm install
+
+EXPOSE 8080
+ENV IPADDR=0.0.0.0
+
+CMD node server
