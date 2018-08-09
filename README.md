@@ -6,6 +6,8 @@ GAuth
 [![Build Status](https://travis-ci.org/gbraad/gauth.svg?branch=master)](https://travis-ci.org/gbraad/html5-google-authenticator)
 [![pipeline status](https://gitlab.com/gbraad/gauth/badges/master/pipeline.svg)](https://gitlab.com/gbraad/gauth/commits/master)
 <!--[![Build Status](https://drone.io/github.com/gbraad/html5-google-authenticator/status.png)](https://drone.io/github.com/gbraad/html5-google-authenticator/latest)-->
+[![Backers on Open Collective](https://opencollective.com/gauth/backers/badge.svg)](#backers) 
+[![Sponsors on Open Collective](https://opencollective.com/gauth/sponsors/badge.svg)](#sponsors) 
 [![Stories in Ready](https://badge.waffle.io/gbraad/gauth.png?label=ready&title=Ready)](https://waffle.io/gbraad/gauth)
 [![Code Climate](https://codeclimate.com/github/gbraad/html5-google-authenticator/badges/gpa.svg)](https://codeclimate.com/github/gbraad/html5-google-authenticator)
 
@@ -56,6 +58,32 @@ Contributors
 ------------
 Matěj Cepl
 
+This project exists thanks to all the people who contribute. 
+<a href="graphs/contributors"><img src="https://opencollective.com/gauth/contributors.svg?width=890&button=false" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/gauth#backer)]
+
+<a href="https://opencollective.com/gauth#backers" target="_blank"><img src="https://opencollective.com/gauth/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/gauth#sponsor)]
+
+<a href="https://opencollective.com/gauth/sponsor/0/website" target="_blank"><img src="https://opencollective.com/gauth/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/gauth/sponsor/1/website" target="_blank"><img src="https://opencollective.com/gauth/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/gauth/sponsor/2/website" target="_blank"><img src="https://opencollective.com/gauth/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/gauth/sponsor/3/website" target="_blank"><img src="https://opencollective.com/gauth/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/gauth/sponsor/4/website" target="_blank"><img src="https://opencollective.com/gauth/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/gauth/sponsor/5/website" target="_blank"><img src="https://opencollective.com/gauth/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/gauth/sponsor/6/website" target="_blank"><img src="https://opencollective.com/gauth/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/gauth/sponsor/7/website" target="_blank"><img src="https://opencollective.com/gauth/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/gauth/sponsor/8/website" target="_blank"><img src="https://opencollective.com/gauth/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/gauth/sponsor/9/website" target="_blank"><img src="https://opencollective.com/gauth/sponsor/9/avatar.svg"></a>
+
 
 Contact
 -------
@@ -70,3 +98,9 @@ License
 -------
 Licensed under the [GPL license][GPL].
 [GPL]: http://www.gnu.org/licenses/gpl.html
+
+
+
+
+
+
