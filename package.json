@@ -22,7 +22,8 @@
     "toolbar": false
   },
   "dependencies": {
-    "express": "~3.4.8"
+    "express": "~3.4.8",
+    "opencollective": "^1.0.3"
   },
   "devDependencies": {
     "connect-livereload": "~0.3.2",
@@ -41,9 +42,14 @@
   },
   "scripts": {
     "test": "gulp",
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "opencollective-postinstall"
   },
   "engines": {
     "node": "0.10.x"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/gauth"
   }
 }
