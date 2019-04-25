@@ -58,3 +58,22 @@ footer, div[data-role="footer"] {
   display: inline-block;
   vertical-align: middle;
 }
+
+ul#accounts {
+    display: flex;
+    flex-wrap: wrap;
+}
+ul#accounts li {
+    flex-grow: 1;
+    min-width: 125px;
+    position: relative;
+}
+li#accountsHeader {
+    width: 100%;
+}
+ul#accounts li .ui-li-aside {
+    display: block;
+    margin-top: -13px;
+    position: absolute;
+    right: 5px;
+}
