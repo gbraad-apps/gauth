@@ -128,7 +128,9 @@
             // Check if local storage is supported
             if (storageService.isSupported()) {
                 if (!storageService.getObject('accounts')) {
-                    addAccount('alice@google.com', 'JBSWY3DPEHPK3PXP');
+                    //addAccount('alice@google.com (demo account)', 'JBSWY3DPEHPK3PXP');
+                    storageService.setObject('accounts', []);
+                    toggleEdit();
                 }
 
                 updateKeys();
@@ -160,7 +162,7 @@
 
             var clearAddFields = function() {
                 $('#keyAccount').val('');
-		$('#keySecret').val('');
+		        $('#keySecret').val('');
             };
 
             $('#edit').click(function() { toggleEdit(); });
@@ -241,6 +243,7 @@
             storageService.setObject('accounts', accounts);
 
             updateKeys();
+            toggleEdit();
 
             return true;
         };
