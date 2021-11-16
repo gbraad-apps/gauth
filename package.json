@@ -1,6 +1,6 @@
 {
   "name": "html5-gauth",
-  "version": "0.9.5",
+  "version": "0.9.10",
   "description": "simple application for muti-factor authentication",
   "keywords": [
     "totp",
@@ -9,41 +9,10 @@
   "author": "Gerard Braad",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/gbraad/gauth/issues"
+    "url": "https://github.com/gbraad/gauthnl/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/gbraad/gauth.git"
-  },
-  "main": "server.js",
-  "window": {
-    "width": 360,
-    "height": 480,
-    "toolbar": false
-  },
-  "dependencies": {
-    "express": "~3.4.8"
-  },
-  "devDependencies": {
-    "connect-livereload": "~0.3.2",
-    "expect.js": "~0.3.1",
-    "express": "~3.4.8",
-    "gulp": "~3.5.2",
-    "gulp-jshint": "~1.4.0",
-    "gulp-livereload": "~1.1.1",
-    "gulp-mocha": "~0.4.1",
-    "gulp-util": "~2.2.0",
-    "gulp-zip": "~0.3.4",
-    "jshint": "~2.4.1",
-    "jssha": "~1.5.0",
-    "mocha": "~1.19.0",
-    "tiny-lr": "~0.0.5"
-  },
-  "scripts": {
-    "test": "gulp",
-    "start": "node server.js"
-  },
-  "engines": {
-    "node": "0.10.x"
+    "url": "git://github.com/gbraadnl/gauth.git"
   }
 }
