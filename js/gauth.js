@@ -176,9 +176,9 @@
                 var key = keyUtilities.generate(account.secret);
 
                 // Construct HTML
-                var detLink = $('<h3>' + key + '</h3><p>' + account.name + '</p>');
+                var detLink = $('<span class="secret"><h3>' + key + '</h3><p>' + account.name + '</p></span>');
                 var accElem = $('<li data-icon="false">').append(detLink);
-
+ 
                 if(editingEnabled) {
                     var delLink = $('<p class="ui-li-aside"><a class="ui-btn-icon-notext ui-icon-delete" href="#"></a></p>');
                     delLink.click(function () {

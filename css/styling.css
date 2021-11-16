@@ -58,3 +58,7 @@ footer, div[data-role="footer"] {
   display: inline-block;
   vertical-align: middle;
 }
+
+#accounts .secret {
+    text-align: left;
+}
