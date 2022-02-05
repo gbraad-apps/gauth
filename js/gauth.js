@@ -197,6 +197,15 @@
                         deleteAccount(index);
                     });
                     accElem.append(delLink);
+                } else {
+		    // If not selecting for deletion, copy the key on click.
+		    accElem.click(function () {
+			navigator.clipboard.writeText(key).then(function () {
+			    toastr.success(`Copied key ${key} for ${account.name}`)
+			}).catch(function (e) {
+			    toastr.error('Unable to copy key: missing clipboard access permission');
+			});
+		    });
                 }
 
                 // Add HTML element
