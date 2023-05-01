@@ -24,15 +24,21 @@ Authors
 
 | [!["Gerard Braad"](http://gravatar.com/avatar/e466994eea3c2a1672564e45aca844d0.png?s=60)](http://gbraad.nl "Gerard Braad <me@gbraad.nl>") |
 |---|
-| [@gbraad](https://twitter.com/gbraad)  |
+| [@gbraad](https://gbraad.nl/social)  |
 
 
 Donations
 ---------
-A small donation to show appreciation is always welcome.
+Become a patron or sponsor, by simply clicking one of these buttons
 
-[![Gratipay tip](https://img.shields.io/gratipay/gbraad.svg)](https://gratipay.com/gbraad)
-[![Flattr this](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/717982/GAuth-Authenticator)
+[![](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/gbraad)
+
+[![Github Sponsorship](.github/github_sponsor_btn.svg)](https://github.com/sponsors/gbraad)
+
+... or consider a small one-time donation to show appreciation
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/gbraad)
+
 [![PayPal donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40gbraad%2enl&lc=US&item_name=gbraad&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
 
 
