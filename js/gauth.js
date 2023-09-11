@@ -153,7 +153,7 @@
                     $.mobile.navigate('#main');
                 } else {
                     $('#keySecret').focus();
-		}
+                }
             });
 
             $('#addKeyCancel').click(function() {
@@ -162,11 +162,20 @@
 
             var clearAddFields = function() {
                 $('#keyAccount').val('');
-		        $('#keySecret').val('');
+                $('#keySecret').val('');
             };
 
             $('#edit').click(function() { toggleEdit(); });
             $('#export').click(function() { exportAccounts(); });
+            $('#import').click(function() {
+                // Sneakily "delegate" the click to an invisible INPUT
+                // element.  That lets us use the input's `files`
+                // while maintaining a consistent button UI.
+                $('#import-files').click();
+            });
+            $('#import-files').change(function(evt) {
+                importAccounts(evt);
+            });
         };
 
         var updateKeys = function() {
@@ -188,6 +197,15 @@
                         deleteAccount(index);
                     });
                     accElem.append(delLink);
+                } else {
+                    // If not selecting for deletion, copy the key on click.
+                    accElem.click(function () {
+                        navigator.clipboard.writeText(key).then(function () {
+                            toastr.success(`Copied key ${key} for ${account.name}`)
+                        }).catch(function (e) {
+                            toastr.error('Unable to copy key: missing clipboard access permission');
+                        });
+                    });
                 }
 
                 // Add HTML element
@@ -211,6 +229,93 @@
             var blob = new Blob([accounts], {type: 'text/plain;charset=utf-8'});
 
             saveAs(blob, 'gauth-export.json');
+        };
+
+        // Helper to ensure that parsed objects are arrays of
+        // name/secret keyed objects.
+        const validateAccountData = function(data) {
+            if (!(data instanceof Array)) {
+                throw new SyntaxError("Account list is not an array");
+            }
+            if (data.length === 0) {
+                throw new SyntaxError("Account list is empty");
+            }
+            // Helper to check if its argument is a string.
+            const isNonemptyString = function (val) {
+                return (typeof val === "string" || val instanceof String) &&
+                    val.length > 0;
+            }
+
+            for (let index = 0; index < data.length; ++index) {
+                const element = data[index];
+                const keys = Object.keys(element).sort();
+                if (keys.length !== 2) {
+                    throw new SyntaxError(`Account data at index ${index} has unexpected entries: ${keys}`);
+                }
+                if (keys[0] !== "name") {
+                    throw new SyntaxError(`Account data at index ${index} has no account name`);
+                } else if(!isNonemptyString(element.name)) {
+                    throw new SyntaxError(`Account data at index ${index} has invalid account name: '${element.name}'`);
+                }
+                if (keys[1] !== "secret") {
+                    throw new SyntaxError(`Account data at index ${index} has no account secret`);
+                } else if(!isNonemptyString(element.secret)) {
+                    throw new SyntaxError(`Account data at index ${index} has invalid account secret: '${element.secret}'`);
+                }
+            }
+        };
+
+        // Merge new_data into dest, skipping duplicate secrets.
+        // This requires both to be valid account lists.
+        var mergeAccountData = function(dest, new_data) {
+            const existing = {};
+            for (const element of dest) {
+                existing[element.secret] = element.name;
+            }
+            for (const element of new_data) {
+                const prior_name = existing[element.secret];
+                if (prior_name !== undefined) {
+                    toastr.warning(`Skipping account "${element.name}"; duplicate of "${prior_name}"`);
+                } else {
+                    dest.push({name: element.name, secret: element.secret});
+                }
+            }
+        };
+
+        var importAccounts = async function(evt) {
+            const files = evt.target.files;
+            if (files.length === 0) {
+                toastr.warning("Please select one or more files to upload.");
+                return;
+            }
+            const new_accounts = [];
+            var valid_files = 0;
+            for (const file of files) {
+                const text = await file.text();
+                try {
+                    const data = JSON.parse(text)
+                    validateAccountData(data);
+                    valid_files += 1;
+                    let len = new_accounts.length;
+                    mergeAccountData(new_accounts, data);
+                    console.log(`Read ${data.length} accounts from ${file.name}, ${new_accounts.length - len} unique`);
+                } catch (e) {
+                    console.warn(`Error processing ${file.name}`, e);
+                    toastr.error(e, `Import failed on ${file.name}: invalid JSON data.`);
+                }
+            }
+            if (new_accounts.length > 0) {
+                const accounts = storageService.getObject('accounts');
+                var len = accounts.length;
+                mergeAccountData(accounts, new_accounts);
+                len = accounts.length - len;
+                console.log(`Added total of new ${len} new accounts`);
+                storageService.setObject('accounts', accounts);
+                updateKeys();
+                toastr.success(`Imported ${new_accounts.length} accounts (${len} new) from ${valid_files} file${valid_files > 1 ? "s" : ""}`);
+            } else {
+                toastr.warning('No accounts imported');
+            }
         };
 
         var deleteAccount = function(index) {
