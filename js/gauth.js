@@ -19,7 +19,12 @@
 
     var StorageService = function() {
         var setObject = function(key, value) {
-            localStorage.setItem(key, JSON.stringify(value));
+            var sorted = value.sort((a,b) => {
+                let aname = a.name.toLowerCase();
+                let bname = b.name.toLowerCase();
+                return (aname > bname) ? 1 : ((bname > aname) ? -1 : 0);    
+            });
+            localStorage.setItem(key, JSON.stringify(sorted));    
         };
 
         var getObject = function(key) {
