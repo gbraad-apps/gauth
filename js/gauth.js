@@ -19,7 +19,8 @@
 
     var StorageService = function() {
         var setObject = function(key, value) {
-            localStorage.setItem(key, JSON.stringify(value));
+            var sorted = value.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+            localStorage.setItem(key, JSON.stringify(sorted));
         };
 
         var getObject = function(key) {
@@ -39,7 +40,8 @@
             setObject: setObject
         };
     };
-
+            var sorted = value.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+            localStorage.setItem(key, JSON.stringify(sorted));
     exports.StorageService = StorageService;
 
     // Originally based on the JavaScript implementation as provided by Russell Sayers on his Tin Isles blog:
