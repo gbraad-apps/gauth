@@ -28,6 +28,14 @@ footer, div[data-role="footer"] {
    border-radius: 0 !important;
 }
 
+.ui-mobile .ui-page-active{
+    overflow-x: visible;
+}
+
+.ui-content{
+    overflow-x: visible;
+}
+
 #panelheader {
     background-color: #1593f9;
     border: none;
@@ -43,6 +51,12 @@ footer, div[data-role="footer"] {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+}
+
+#accountsHeader{
+    position:sticky;
+    top:0;
+    z-index:3;
 }
 
 #addButton {
